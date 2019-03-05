@@ -6,7 +6,12 @@ import Nav from 'react-bootstrap/Nav'
 import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
 import Jumbotron from 'react-bootstrap/Jumbotron'
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
 import { LinkContainer } from 'react-router-bootstrap';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 
 class App extends Component {
     render() {
@@ -26,7 +31,7 @@ class Navigation extends Component {
     render() {
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand>Team Gravity</Navbar.Brand>
+                <Navbar.Brand>Gravity</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
@@ -149,47 +154,256 @@ class ContactPage extends Component {
 }
 
 class DemoPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { user: null };
+    }
+
+    componentDidMount() {
+        // Listen to state authentication state change
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({
+                    user: user
+                });
+            } else {
+                this.setState({ user: null });
+            }
+        });
+    }
+
+    logout() {
+        this.setState({ user: null });
+    }
+
     render() {
         return (
-            <div className="jumbotron">
-              <div className="container">
-                <div className="Auth">
-                  <p>Please sign in or sign up to access patient documents:</p>
-                </div>
-                <div className="form-group">
-                  <label>Organization:</label>
-                  <input className="form-control"
-                    name="organization"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Email:</label>
-                  <input className="form-control"
-                    name="email"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Password:</label>
-                  <input type="password" className="form-control"
-                    name="password"
-                  />
-                </div>
-
-                <div className="form-group">
-                    <div>
-                      <button className="btn btn-dark mr-2 mt-2" >
-                        Sign In
-                    </button>
-                      <button className="btn btn-outline-secondary mr-2 mt-2" >
-                        Sign Up
-                    </button>
-                    </div>
-                </div>
-              </div>
+            <div>
+                {!this.state.user && <Auth />}
+                {this.state.user && <Store />}
             </div>
         );
+    }
+}
+
+class Auth extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            errorMessage: ''
+        };
+    }
+
+    handleChange(event) {
+        let field = event.target.name; // which input
+        let value = event.target.value; // what value
+
+        let changes = {}; // object to hold changes
+        changes[field] = value; // change this field
+        this.setState(changes); // update state
+    }
+
+    // Method for handling someone signing up
+    handleSignUp() {
+
+        // Create a new user and save their information
+        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(() => {
+            // Update the display name of the user
+            let profilePromise = firebase.auth().currentUser.updateProfile({
+                displayName: this.state.username
+            });
+
+            // Return promise for chaining
+            return profilePromise;
+        })
+        .then(() => {
+            // Set the state as the current (firebase) user
+            this.setState({
+                user: firebase.auth().currentUser,
+                username: ''
+            });
+        })
+        .catch((err) => {
+            this.setState({ errorMessage: err.message });
+        });
+    }
+
+    // Method for handling someone signing in
+    handleSignIn() {
+        // Sign in the user
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        .catch((err) => {
+            this.setState({ errorMessage: err.message });
+        });
+    }
+
+
+    render() {
+        let errorDiv = this.state.errorMessage === "" ? "" : <div className="alert alert-danger">Error: {this.state.errorMessage}</div>
+        return (
+            <div className="jumbotron">
+                <div className="container">
+                    {errorDiv}
+                    <div className="Auth">
+                        <p>Please sign in or sign up to access patient documents:</p>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Email:</label>
+                        <input className="form-control" name="email" value={this.state.email} onChange={event => this.handleChange(event)}/>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Password:</label>
+                        <input type="password" className="form-control" name="password" value={this.state.password} onChange={event => this.handleChange(event)}/>
+                    </div>
+
+                    <div className="form-group">
+                        <div>
+                            <button className="btn btn-dark mr-2 mt-2" onClick={() => this.handleSignIn()}>Sign In</button>
+                            <button className="btn btn-outline-secondary mr-2 mt-2" onClick={() => this.handleSignUp()}>Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+class Store extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            patients: [],
+            show: false,
+            name: "",
+            addr: "",
+            dob: ""
+        };
+    }
+
+    componentDidMount() {
+        this.queueRef = firebase.database().ref('queue/' + this.props.queueId);
+    }
+
+    handleClose() {
+        this.setState({ show: false });
+    }
+
+    handleShow() {
+        this.setState({ show: true });
+    }
+
+    addPatient() {
+        if (this.state.name === "" || this.state.addr === "" || this.state.dob === "") {
+            alert("One of the required fields is empty!");
+            return;
+        } else {
+            let patients = this.state.patients;
+            let newPatient = {
+                name: this.state.name,
+                addr: this.state.addr,
+                dob: this.state.dob
+            }
+            patients.push(newPatient);
+            this.setState({patients: patients});
+            this.handleClose();
+        }
+    }
+
+    handleChange(event) {
+        let field = event.target.name; // which input
+        let value = event.target.value; // what value
+
+        let changes = {}; // object to hold changes
+        changes[field] = value; // change this field
+        this.setState(changes); // update state
+    }
+
+    render() {
+        let patients = this.state.patients.map((patient, i) => {return <Patient info={patient} key = {i} />});
+        return (
+            <div>
+                <div style={{ 'background-color': 'grey', 'padding-top': '15px', 'padding-bottom': '1px' }}>
+                    <div className="form-group">
+                        <div className="col-12">
+
+                            <div className="form-group">
+                                <label style={{ 'color': 'white' }}>Patient Name:</label>
+                                <input type="text" name="name" className="form-control"/>
+                            </div>
+
+                            <div className="form-group">
+                                <label style={{ 'color': 'white' }}>Patient Address:</label>
+                                <input type="text" name="addr" className="form-control"/>
+                            </div>
+
+                            <div className="form-group">
+                                <label style={{ 'color': 'white' }}>Patient DOB:</label>
+                                <input type="text" name="dob" className="form-control"/>
+                            </div>
+
+                        </div>
+                        <div style={{ 'padding-top': '7px' }}></div>
+                        <button className="btn btn-primary" onClick={() => this.handleShow()}>Add a Patient</button>
+                    </div>
+                </div>
+                <div className="jumbotron">
+                    <div className="row">
+                        {patients}
+                    </div>
+
+                </div>
+                <Modal show={this.state.show} onHide={() => this.handleClose()}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>New Patient</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div>
+                            <label>Patient Name:</label>
+                            <span>         </span>
+                            <input type="text" name="name" onChange={event => this.handleChange(event)}/>
+                        </div>
+                        <div>
+                            <label>Patient Address:</label>
+                            <span>         </span>
+                            <input type="text" name="addr" onChange={event => this.handleChange(event)}/>
+                        </div>
+                        <div>
+                            <label>Patient DOB:</label>
+                            <span>         </span>
+                            <input type="text" name="dob" onChange={event => this.handleChange(event)}/>
+                        </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => this.handleClose()}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={() => this.addPatient()}>
+                            Save
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+        )
+    }
+}
+
+class Patient extends Component {
+    render() {
+        return (
+            <div className="col-sm-6 col-md-4 col-lg-2 mb-3">
+                <Card style={{ width: '14rem' }} >
+                    <Card.Img variant="top" src="https://www.synbio.cam.ac.uk/images/avatar-generic.jpg/image" />
+                    <Card.Body>
+                        <Card.Title>{this.props.info.name}</Card.Title>
+                    </Card.Body>
+                </Card>
+            </div>
+        )
     }
 }
 

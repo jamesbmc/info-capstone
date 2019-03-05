@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
+import config from "./Config"
+import firebase from 'firebase/app';
+
+firebase.initializeApp(config);
 
 ReactDOM.render(
     <BrowserRouter>
