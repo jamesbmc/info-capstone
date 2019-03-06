@@ -40,7 +40,6 @@ export class Patient extends Component {
         this.state.records.push(this.state.file.name);
         let unique = Array.from(new Set(this.state.records));
         this.patientRef.update({records: unique});
-        alert("File uploaded.");
     }
 
     handleFiles(event) {
@@ -51,6 +50,10 @@ export class Patient extends Component {
         this.storageRef.child(name).delete();
         let removed = this.state.records.filter(record => record !== name);
         this.patientRef.update({records: removed});
+    }
+
+    handleDownload(name) {
+        this.storageRef.child(name).getDownloadURL().then(url => window.open(url, '_blank'));
     }
 
     componentDidMount() {
@@ -68,7 +71,7 @@ export class Patient extends Component {
     }
 
     render() {
-        let records = this.state.records.map((name, i) => <Record key={i} name={name} remove={(name) => this.handleFileDelete(name)} />);
+        let records = this.state.records.map((name, i) => <Record key={i} name={name} remove={name => this.handleFileDelete(name)} download={name => this.handleDownload(name)} />);
         return (
             <div>
                 <div className="col-sm-6 col-md-4 col-lg-2 mb-3">
@@ -92,7 +95,7 @@ export class Patient extends Component {
                         <div className="col-12">
                             <input type="file" id="myFile" onChange={event => this.handleFiles(event)} />
                             <Button variant="secondary" onClick={() => this.handleUpload()}>
-                                Upload New Record
+                                Upload Record
                             </Button>
                             <Button variant="secondary" onClick={() => this.handleDelete()}>
                                 Delete Patient
