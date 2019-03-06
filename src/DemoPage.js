@@ -24,14 +24,17 @@ export class DemoPage extends Component {
     }
 
     logout() {
-        this.setState({ user: null });
+        firebase.auth().signOut().catch(error => {
+            // An error happened
+            console.log(error);
+        });
     }
 
     render() {
         return (
             <div>
                 {!this.state.user && <Auth />}
-                {this.state.user && <Store />}
+                {this.state.user && <Store logout={() => this.logout()} />}
             </div>
         );
     }

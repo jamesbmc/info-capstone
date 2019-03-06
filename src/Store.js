@@ -98,6 +98,7 @@ export class Store extends Component {
                         </div>
                         <div style={{ 'paddingTop': '7px' }}></div>
                         <button className="btn btn-primary" onClick={() => this.handleShow()}>Add a Patient</button>
+                        <button className="btn btn-light ml-2" onClick={() => this.props.logout()}>Sign Out</button>
                     </div>
                 </div>
                 <div className="jumbotron">
