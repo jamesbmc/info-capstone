@@ -18,7 +18,25 @@ export class Store extends Component {
     }
 
     componentDidMount() {
-        this.queueRef = firebase.database().ref('queue/' + this.props.queueId);
+        this.infoRef = firebase.database().ref('patients/');
+
+        this.infoRef.on('value', (snapshot) => {
+            let patients = snapshot.val();
+            if (patients != null) {
+                let patientArray = Object.keys(patients).map(id => {
+                    return {
+                        id: id,
+                        name: patients[id].name,
+                        addr: patients[id].addr,
+                        dob: patients[id].dob,
+                        records: patients[id].records
+                    }
+                });
+                this.setState({ patients: patientArray});
+            } else {
+                this.setState({ patients: []});
+            }
+        });
     }
 
     handleClose() {
@@ -34,14 +52,13 @@ export class Store extends Component {
             alert("One of the required fields is empty!");
             return;
         } else {
-            let patients = this.state.patients;
             let newPatient = {
                 name: this.state.name,
                 addr: this.state.addr,
-                dob: this.state.dob
+                dob: this.state.dob,
+                records: []
             }
-            patients.push(newPatient);
-            this.setState({patients: patients});
+            this.infoRef.push(newPatient);
             this.handleClose();
         }
     }
