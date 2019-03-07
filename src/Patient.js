@@ -26,8 +26,8 @@ export class Patient extends Component {
     }
 
     handleDelete() {
-        firebase.database().ref('patients/' + this.props.info.id).remove();
-        this.state.records.forEach(record => firebase.storage().ref('patients/' + this.props.info.id).child(record).delete());
+        firebase.database().ref(firebase.auth().currentUser.uid + '/' + this.props.info.id).remove();
+        this.state.records.forEach(record => firebase.storage().ref(firebase.auth().currentUser.uid + '/' + this.props.info.id).child(record).delete());
         this.handleClose();
     }
 
@@ -57,8 +57,8 @@ export class Patient extends Component {
     }
 
     componentDidMount() {
-        this.patientRef = firebase.database().ref('patients/' + this.props.info.id);
-        this.storageRef = firebase.storage().ref('patients/' + this.props.info.id);
+        this.patientRef = firebase.database().ref(firebase.auth().currentUser.uid + '/' + this.props.info.id);
+        this.storageRef = firebase.storage().ref(firebase.auth().currentUser.uid + '/' + this.props.info.id);
 
         this.patientRef.on('value', (snapshot) => {
             let patient = snapshot.val();

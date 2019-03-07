@@ -21,7 +21,7 @@ export class Store extends Component {
     }
 
     componentDidMount() {
-        this.infoRef = firebase.database().ref('patients/');
+        this.infoRef = firebase.database().ref(firebase.auth().currentUser.uid);
 
         this.infoRef.on('value', (snapshot) => {
             let patients = snapshot.val();
