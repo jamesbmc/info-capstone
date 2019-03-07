@@ -11,9 +11,12 @@ export class Store extends Component {
         this.state = {
             patients: [],
             show: false,
-            name: "",
-            addr: "",
-            dob: ""
+            newName: "",
+            newAddr: "",
+            newDob: "",
+            searchName: "",
+            searchAddr: "",
+            searchDob: ""
         };
     }
 
@@ -48,14 +51,14 @@ export class Store extends Component {
     }
 
     addPatient() {
-        if (this.state.name === "" || this.state.addr === "" || this.state.dob === "") {
+        if (this.state.newName === "" || this.state.newAddr === "" || this.state.newDob === "") {
             alert("One of the required fields is empty!");
             return;
         } else {
             let newPatient = {
-                name: this.state.name,
-                addr: this.state.addr,
-                dob: this.state.dob,
+                name: this.state.newName,
+                addr: this.state.newAddr,
+                dob: this.state.newDob,
                 records: []
             }
             this.infoRef.push(newPatient);
@@ -73,7 +76,17 @@ export class Store extends Component {
     }
 
     render() {
-        let patients = this.state.patients.map((patient, i) => {return <Patient info={patient} key = {i} />});
+        let filtered = this.state.patients;
+        if (this.state.searchName !== "") {
+            filtered = filtered.filter(patient => patient.name.toLowerCase().includes(this.state.searchName.toLowerCase()));
+        }
+        if (this.state.searchAddr !== "") {
+            filtered = filtered.filter(patient => patient.addr.toLowerCase().includes(this.state.searchAddr.toLowerCase()));
+        }
+        if (this.state.searchDob !== "") {
+            filtered = filtered.filter(patient => patient.dob.toLowerCase().includes(this.state.searchDob.toLowerCase()));
+        }
+        let patients = filtered.map((patient, i) => {return <Patient info={patient} key = {i} />});
         return (
             <div>
                 <div style={{ 'backgroundColor': 'grey', 'paddingTop': '15px', 'paddingBottom': '1px' }}>
@@ -82,17 +95,17 @@ export class Store extends Component {
 
                             <div className="form-group">
                                 <label style={{ 'color': 'white' }}>Patient Name:</label>
-                                <input type="text" name="name" className="form-control"/>
+                                <input type="text" name="searchName" className="form-control" onChange={event => this.handleChange(event)} />
                             </div>
 
                             <div className="form-group">
                                 <label style={{ 'color': 'white' }}>Patient Address:</label>
-                                <input type="text" name="addr" className="form-control"/>
+                                <input type="text" name="searchAddr" className="form-control" onChange={event => this.handleChange(event)} />
                             </div>
 
                             <div className="form-group">
                                 <label style={{ 'color': 'white' }}>Patient DOB:</label>
-                                <input type="text" name="dob" className="form-control"/>
+                                <input type="text" name="searchDob" className="form-control" onChange={event => this.handleChange(event)} />
                             </div>
 
                         </div>
@@ -115,17 +128,17 @@ export class Store extends Component {
                         <div>
                             <label>Patient Name:</label>
                             <span>         </span>
-                            <input type="text" name="name" onChange={event => this.handleChange(event)}/>
+                            <input type="text" name="newName" onChange={event => this.handleChange(event)}/>
                         </div>
                         <div>
                             <label>Patient Address:</label>
                             <span>         </span>
-                            <input type="text" name="addr" onChange={event => this.handleChange(event)}/>
+                            <input type="text" name="newAddr" onChange={event => this.handleChange(event)}/>
                         </div>
                         <div>
                             <label>Patient DOB:</label>
                             <span>         </span>
-                            <input type="text" name="dob" onChange={event => this.handleChange(event)}/>
+                            <input type="text" name="newDob" onChange={event => this.handleChange(event)}/>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>

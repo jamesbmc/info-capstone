@@ -79,6 +79,8 @@ export class Patient extends Component {
                         <Card.Img variant="top" src={icon} />
                         <Card.Body>
                             <Card.Title>{this.props.info.name}</Card.Title>
+                            <div>{this.props.info.addr}</div>
+                            <div>{this.props.info.dob}</div>
                         </Card.Body>
                     </Card>
                 </div>
