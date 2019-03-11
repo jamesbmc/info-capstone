@@ -94,18 +94,18 @@ export class Store extends Component {
                         <div className="col-12">
 
                             <div className="form-group">
-                                <label style={{ 'color': 'white' }}>Patient Name:</label>
+                                <label style={{ 'color': 'white' }}>Filter by Patient Full Name:</label>
                                 <input type="text" name="searchName" className="form-control" onChange={event => this.handleChange(event)} />
                             </div>
 
                             <div className="form-group">
-                                <label style={{ 'color': 'white' }}>Patient Address:</label>
+                                <label style={{ 'color': 'white' }}>Filter by Patient Address:</label>
                                 <input type="text" name="searchAddr" className="form-control" onChange={event => this.handleChange(event)} />
                             </div>
 
                             <div className="form-group">
-                                <label style={{ 'color': 'white' }}>Patient DOB:</label>
-                                <input type="text" name="searchDob" className="form-control" onChange={event => this.handleChange(event)} />
+                                <label style={{ 'color': 'white' }}>Filter by Patient DOB:</label>
+                                <input type="date" name="searchDob" className="form-control" onChange={event => this.handleChange(event)} />
                             </div>
 
                         </div>
@@ -126,7 +126,7 @@ export class Store extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <div>
-                            <label>Patient Name:</label>
+                            <label>Patient Full Name:</label>
                             <span>         </span>
                             <input type="text" name="newName" onChange={event => this.handleChange(event)}/>
                         </div>
@@ -138,7 +138,7 @@ export class Store extends Component {
                         <div>
                             <label>Patient DOB:</label>
                             <span>         </span>
-                            <input type="text" name="newDob" onChange={event => this.handleChange(event)}/>
+                            <input type="date" name="newDob" onChange={event => this.handleChange(event)}/>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>

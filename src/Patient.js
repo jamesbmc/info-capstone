@@ -36,6 +36,10 @@ export class Patient extends Component {
             alert("You must select a file!");
             return;
         }
+        if (this.state.file.type !== "text/plain" && this.state.file.type !== "application/pdf") {
+            alert("Please upload a .pdf or .txt file.");
+            return;
+        }
         this.storageRef.child(this.state.file.name).put(this.state.file);
         this.state.records.push(this.state.file.name);
         let unique = Array.from(new Set(this.state.records));
