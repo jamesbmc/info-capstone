@@ -7,9 +7,23 @@ export class Auth extends Component {
         super(props);
         this.state = {
             email: '',
+            username: '',
             password: '',
-            errorMessage: ''
+            errorMessage: '',
+            users: {
+              set: []
+            }
         };
+    }
+
+    componentDidMount() {
+        this.infoRef = firebase.database().ref('users/');
+
+        this.infoRef.on('value', (snapshot) => {
+          if (snapshot.val() !== null) {
+            this.setState({users: snapshot.val()});
+          }
+        });
     }
 
     handleChange(event) {
@@ -24,6 +38,11 @@ export class Auth extends Component {
     // Method for handling someone signing up
     handleSignUp() {
 
+      if (this.state.users.set.length !== 0 && this.state.users.set[this.state.username] !== null) {
+        alert("Username already in use!");
+      } else {
+        this.infoRef.child("set").child(this.state.username).push(1);
+
         // Create a new user and save their information
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(() => {
@@ -37,14 +56,12 @@ export class Auth extends Component {
         })
         .then(() => {
             // Set the state as the current (firebase) user
-            this.setState({
-                user: firebase.auth().currentUser,
-                username: ''
-            });
+            this.infoRef.child(firebase.auth().currentUser.uid).child(this.state.username).push(1);
         })
         .catch((err) => {
             this.setState({ errorMessage: err.message });
         });
+      }
     }
 
     // Method for handling someone signing in
@@ -58,7 +75,7 @@ export class Auth extends Component {
 
 
     render() {
-        let errorDiv = this.state.errorMessage === "" ? "" : <div className="alert alert-danger">Error: {this.state.errorMessage}</div>
+        let errorDiv = this.state.errorMessage === "" ? "" : <div className="alert alert-danger">Error: {this.state.errorMessage}</div>;
         return (
             <div className="jumbotron">
                 <div className="container">
@@ -70,6 +87,11 @@ export class Auth extends Component {
                     <div className="form-group">
                         <label>Email:</label>
                         <input className="form-control" name="email" value={this.state.email} onChange={event => this.handleChange(event)}/>
+                    </div>
+
+                    <div className="form-group">
+                        <label>User Name:</label>
+                        <input className="form-control" name="username" value={this.state.username} onChange={event => this.handleChange(event)}/>
                     </div>
 
                     <div className="form-group">

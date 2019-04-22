@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import { Auth } from './Auth';
-import { Store } from './Store';
+import { Forum } from './Forum';
 
 export class DemoPage extends Component {
     constructor(props) {
@@ -34,7 +34,7 @@ export class DemoPage extends Component {
         return (
             <div>
                 {!this.state.user && <Auth />}
-                {this.state.user && <Store logout={() => this.logout()} />}
+                {this.state.user && <Forum logout={() => this.logout()} />}
             </div>
         );
     }
