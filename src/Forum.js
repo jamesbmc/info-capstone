@@ -84,8 +84,10 @@ export class Forum extends Component {
         let posts = this.state.posts.map((post, i) => <Post key={i} info={post} />);
         return (
             <div>
-            <button className="btn btn-primary" onClick={() => this.handleShow()}>Create a New Post</button>
-            {posts}
+            <div style={{height: '80%', border: '1px black solid', position: 'absolute', width: '100%'}}>
+                {posts}
+            </div>
+            <button className="btn btn-primary" onClick={() => this.handleShow()} style={{position: 'absolute', top: '90%'}}>Create a New Post</button>
             <Modal show={this.state.show} onHide={() => this.handleClose()}>
                     <Modal.Header closeButton>
                         <Modal.Title>New Post</Modal.Title>

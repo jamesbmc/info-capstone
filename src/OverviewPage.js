@@ -7,11 +7,7 @@ export class OverviewPage extends Component {
             <Jumbotron>
                 <h1>Project Gravity</h1>
                 <p className="text-left">
-                    Long-term follow-up care is an important aspect of cancer treatment to identify and summarily treat recurrent cancer.
-                    One of the greatest issues facing patients and doctors is the fact that hospitals use paper records to track long-term follow-up care.
-                    These documents are hard to transfer to other hospitals and search through for relevant information and easy to lose. There are other solutions
-                    aiming to solve this issue but they lack features (e.g. Epic lacks the ability to add doctor notes). At Team Gravity, we aim to fill this gap
-                    and provide a comprehensive solution that benefits patients and hospitals alike.
+                    Information sharing is a huge issue in the medical field. Hospitals use different information storage systems that do not communicate and so must rely upon faxing paper records. This is  prone to data loss and slow since information must be re-entered through scanning or by hand upon arrival. We have built a platform to facilitate discussion around the standardization of healthcare record formats and transmission of those documents. Our goal is an accessible repository as to why this consolidation is worthy cause and how to achieve it through reaching out to state legislators.
                 </p>
             </Jumbotron>
         );
