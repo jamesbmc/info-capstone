@@ -34,7 +34,7 @@ export class DemoPage extends Component {
         return (
             <div>
                 {!this.state.user && <Auth />}
-                {this.state.user && <Forum logout={() => this.logout()} />}
+                {this.state.user && <Forum logout={() => this.logout()} username={this.state.user.displayName} />}
             </div>
         );
     }

@@ -15,7 +15,6 @@ export class Forum extends Component {
 
     componentDidMount() {
         this.infoRef = firebase.database().ref('posts');
-        this.userRef = firebase.database().ref('users');
 
         this.infoRef.on('value', (snapshot) => {
             let posts = snapshot.val();
@@ -36,12 +35,6 @@ export class Forum extends Component {
             } else {
                 this.setState({ posts: []});
             }
-        });
-
-        this.userRef.on('value', (snapshot) => {
-          if (snapshot.val() !== null) {
-            this.setState({users: snapshot.val()});
-          }
         });
     }
 
@@ -67,13 +60,11 @@ export class Forum extends Component {
             alert("One of the required fields is empty!");
             return;
         } else {
-            let userName = this.state.users[firebase.auth().currentUser.uid]
-            let datetime = new Date().getTime()
             let newPost = {
                 title: this.state.title,
                 body: this.state.body,
-                author: Object.keys(userName)[0],
-                date: datetime,
+                author: this.props.username,
+                date: new Date().getTime(),
                 upvotes: [firebase.auth().currentUser.uid]
             }
             this.infoRef.push(newPost);
@@ -82,9 +73,10 @@ export class Forum extends Component {
     }
 
     render() {
-        let posts = this.state.posts.map((post, i) => <Post key={i} info={post} username={Object.keys(this.state.users[firebase.auth().currentUser.uid])[0]} />);
+        let posts = this.state.posts.map((post, i) => <Post key={i} info={post} username={this.props.username} />);
         return (
             <div>
+            <button className="btn btn-primary" onClick={() => this.props.logout()}>Logout</button>
             <div style={{height: '80%', border: '1px black solid', position: 'absolute', width: '100%'}}>
                 {posts}
             </div>
