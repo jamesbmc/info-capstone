@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import firebase from 'firebase/app';
 import 'firebase/database';
-import { Comment } from './Comment';
+import { Comments } from './Comments';
 
 export class Post extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ export class Post extends Component {
     }
 
     componentDidMount() {
-        this.infoRef = firebase.database().ref('posts/' + this.props.info.id);
+        this.commentRef = firebase.database().ref('comments/');
     }
 
     handleClose() {
@@ -38,9 +38,13 @@ export class Post extends Component {
         if (this.state.comment === "") {
             alert("Please enter a comment!")
         } else {
-            let comment = this.props.username + ": " +  this.state.comment;
-            let comments = typeof this.props.info.comments === "undefined" ? [comment] : this.props.info.comments.push(comment);
-            this.infoRef.update({comments: comments});
+            let comment = {
+                creator: this.props.username,
+                body: this.state.comment,
+                postID: this.props.info.id,
+                date: new Date().getTime()
+            }
+            this.commentRef.push(comment);
         }
     }
 
@@ -48,7 +52,6 @@ export class Post extends Component {
         let upvotes = typeof this.props.info.upvotes === "undefined" ? 0 : this.props.info.upvotes.length;
         let downvotes = typeof this.props.info.downvotes === "undefined" ? 0 : this.props.info.downvotes.length;
         let total = upvotes - downvotes;
-        let comments = typeof this.props.info.comments === "undefined" ? [] : this.props.info.comments.map((comment, i) => <Comment key={i} info={comment} />);
         return (
           <div>
               <div onClick={() => this.handleShow()}>
@@ -73,7 +76,7 @@ export class Post extends Component {
                               Comment
                           </Button>
                           <hr />
-                          {comments}
+                          <Comments postID={this.props.info.id} />
 
                       </Modal.Body>
                   </Modal>

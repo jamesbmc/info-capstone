@@ -26,7 +26,7 @@ export class Forum extends Component {
                         title: posts[id].title,
                         body: posts[id].body,
                         author: posts[id].author,
-                        date: posts[id].date,
+                        date: new Date(posts[id].date),
                         upvotes: posts[id].upvotes,
                         downvotes: posts[id].downvotes,
                         comments: posts[id].comments
@@ -68,7 +68,7 @@ export class Forum extends Component {
             return;
         } else {
             let userName = this.state.users[firebase.auth().currentUser.uid]
-            let datetime = new Date().toString()
+            let datetime = new Date().getTime()
             let newPost = {
                 title: this.state.title,
                 body: this.state.body,
