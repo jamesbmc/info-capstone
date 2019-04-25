@@ -34,7 +34,7 @@ export class Comments extends Component {
     }
 
     render() {
-        let comments = this.state.comments.map((comment, i) => <Comment key={i} info={comment} />);
+        let comments = this.state.comments.sort((a, b) => b.date - a.date).map((comment, i) => <Comment key={i} info={comment} />);
         return (
             <div>
                 {comments}
