@@ -29,6 +29,7 @@ export class Forum extends Component {
                         date: posts[id].date,
                         upvotes: posts[id].upvotes,
                         downvotes: posts[id].downvotes,
+                        comments: posts[id].comments
                     }
                 });
                 this.setState({ posts: postArray});
@@ -81,7 +82,7 @@ export class Forum extends Component {
     }
 
     render() {
-        let posts = this.state.posts.map((post, i) => <Post key={i} info={post} />);
+        let posts = this.state.posts.map((post, i) => <Post key={i} info={post} username={Object.keys(this.state.users[firebase.auth().currentUser.uid])[0]} />);
         return (
             <div>
             <div style={{height: '80%', border: '1px black solid', position: 'absolute', width: '100%'}}>
@@ -94,14 +95,14 @@ export class Forum extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <div>
-                            <label>Title:</label>
+                            <p>Title:</p>
                             <span>         </span>
-                            <input type="text" name="title" onChange={event => this.handleChange(event)}/>
+                            <input type="text" name="title" onChange={event => this.handleChange(event)} style={{width: '95%'}} />
                         </div>
                         <div>
-                            <label>Body:</label>
+                            <p>Body:</p>
                             <span>         </span>
-                            <input type="text" name="body" onChange={event => this.handleChange(event)}/>
+                            <textarea rows="8" cols="60" name="body" onChange={event => this.handleChange(event)}/>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
