@@ -1,6 +1,16 @@
 {
-  "rules": {
-    	".read": "auth != null",
-      ".write": "auth != null"
-  }
+    "rules": {
+        "users": {
+            ".read": true,
+            ".write": true
+        },
+        "posts": {
+            ".read": "auth != null",
+            ".write": "auth != null"
+        },
+        "comments": {
+            ".read": "auth != null",
+            ".write": "auth != null"
+        }
+    }
 }

@@ -22,7 +22,13 @@ export class Auth extends Component {
         this.infoRef.on('value', (snapshot) => {
           if (snapshot.val() !== null) {
             this.setState({users: snapshot.val()});
-          }
+        } else {
+            this.setState({
+                users: {
+                    set: []
+                }
+            });
+        }
         });
     }
 
@@ -38,7 +44,7 @@ export class Auth extends Component {
     // Method for handling someone signing up
     handleSignUp() {
 
-      if (this.state.users.set.length !== 0 && this.state.users.set[this.state.username] !== null) {
+      if (this.state.users.set.length !== 0 && typeof this.state.users.set[this.state.username] !== "undefined") {
         alert("Username already in use!");
       } else {
         this.infoRef.child("set").child(this.state.username).push(1);
@@ -53,10 +59,6 @@ export class Auth extends Component {
 
             // Return promise for chaining
             return profilePromise;
-        })
-        .then(() => {
-            // Set the state as the current (firebase) user
-            this.infoRef.child(firebase.auth().currentUser.uid).child(this.state.username).push(1);
         })
         .catch((err) => {
             this.setState({ errorMessage: err.message });
