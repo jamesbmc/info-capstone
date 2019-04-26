@@ -83,7 +83,13 @@ export class Forum extends Component {
     }
 
     render() {
-        let posts = this.state.posts.map((post, i) => <Post key={i} info={post} username={Object.keys(this.state.users[firebase.auth().currentUser.uid])[0]} />);
+        let posts = this.state.posts.sort((a, b) => {
+            let aUpvotes = typeof a.upvotes === "undefined" ? 0 : a.upvotes.length;
+            let aDownvotes = typeof a.downvotes === "undefined" ? 0 : a.downvotes.length;
+            let bUpvotes = typeof a.upvotes === "undefined" ? 0 : b.upvotes.length;
+            let bDownvotes = typeof a.downvotes === "undefined" ? 0 : b.downvotes.length;
+            return (aUpvotes - aDownvotes) - (bUpvotes - bDownvotes);
+        }).map((post, i) => <Post key={i} info={post} username={Object.keys(this.state.users[firebase.auth().currentUser.uid])[0]} />);
         return (
             <div>
             <button className="btn btn-primary" onClick={() => this.props.logout()}>Logout</button>

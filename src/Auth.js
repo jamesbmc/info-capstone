@@ -14,21 +14,25 @@ export class Auth extends Component {
               set: []
             }
         };
+        this._isMounted = false;
     }
 
     componentDidMount() {
+        this._isMounted = true;
         this.infoRef = firebase.database().ref('users/');
 
         this.infoRef.on('value', (snapshot) => {
-          if (snapshot.val() !== null) {
-            this.setState({users: snapshot.val()});
-        } else {
-            this.setState({
-                users: {
-                    set: []
-                }
-            });
-        }
+            if (this._isMounted) {
+                if (snapshot.val() !== null) {
+                  this.setState({users: snapshot.val()});
+              } else {
+                  this.setState({
+                      users: {
+                          set: []
+                      }
+                  });
+              }
+            }
         });
     }
 
@@ -77,6 +81,9 @@ export class Auth extends Component {
         });
     }
 
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
 
     render() {
         let errorDiv = this.state.errorMessage === "" ? "" : <div className="alert alert-danger">Error: {this.state.errorMessage}</div>;
