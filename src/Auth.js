@@ -57,6 +57,8 @@ export class Auth extends Component {
                 displayName: this.state.username
             });
 
+            this.infoRef.child(firebase.auth().currentUser.uid).child(this.state.username).push(1);
+
             // Return promise for chaining
             return profilePromise;
         })

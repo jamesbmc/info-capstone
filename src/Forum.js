@@ -36,6 +36,16 @@ export class Forum extends Component {
                 this.setState({ posts: []});
             }
         });
+
+        this.userRef = firebase.database().ref('users');
+
+        this.userRef.on('value', (snapshot) => {
+          if (snapshot.val() !== null) {
+            this.setState({users: snapshot.val()});
+        } else {
+            this.setState({users: []});
+        }
+        });
     }
 
     handleClose() {
@@ -63,7 +73,7 @@ export class Forum extends Component {
             let newPost = {
                 title: this.state.title,
                 body: this.state.body,
-                author: this.props.username,
+                author: Object.keys(this.state.users[firebase.auth().currentUser.uid])[0],
                 date: new Date().getTime(),
                 upvotes: [firebase.auth().currentUser.uid]
             }
@@ -73,7 +83,7 @@ export class Forum extends Component {
     }
 
     render() {
-        let posts = this.state.posts.map((post, i) => <Post key={i} info={post} username={this.props.username} />);
+        let posts = this.state.posts.map((post, i) => <Post key={i} info={post} username={Object.keys(this.state.users[firebase.auth().currentUser.uid])[0]} />);
         return (
             <div>
             <button className="btn btn-primary" onClick={() => this.props.logout()}>Logout</button>
