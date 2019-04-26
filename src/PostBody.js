@@ -43,7 +43,7 @@ export class PostBody extends Component {
         return (
             <div>
                 <h1>{this.props.location.state.title}</h1>
-                <p>{this.props.location.state.creator}</p>
+                <p>{this.props.location.state.author}</p>
                 <div className="jumbotron">
                     <p>{this.props.location.state.body}</p>
                 </div>
