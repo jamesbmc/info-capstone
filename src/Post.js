@@ -13,6 +13,7 @@ export class Post extends Component {
                     state: {
                         username: this.props.username,
                         title: this.props.info.title,
+                        creator: this.props.info.creator,
                         body: this.props.info.body
                     }
                  }} style={{ textDecoration: 'none' }}>
