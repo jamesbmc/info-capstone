@@ -86,9 +86,9 @@ export class Forum extends Component {
         let posts = this.state.posts.sort((a, b) => {
             let aUpvotes = typeof a.upvotes === "undefined" ? 0 : a.upvotes.length;
             let aDownvotes = typeof a.downvotes === "undefined" ? 0 : a.downvotes.length;
-            let bUpvotes = typeof a.upvotes === "undefined" ? 0 : b.upvotes.length;
-            let bDownvotes = typeof a.downvotes === "undefined" ? 0 : b.downvotes.length;
-            return (aUpvotes - aDownvotes) - (bUpvotes - bDownvotes);
+            let bUpvotes = typeof b.upvotes === "undefined" ? 0 : b.upvotes.length;
+            let bDownvotes = typeof b.downvotes === "undefined" ? 0 : b.downvotes.length;
+            return (bUpvotes - bDownvotes) - (aUpvotes - aDownvotes);
         }).map((post, i) => <Post key={i} info={post} username={Object.keys(this.state.users[firebase.auth().currentUser.uid])[0]} />);
         return (
             <div>
