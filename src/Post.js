@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import upvote from './upvote.png';
-import upvoteDisabled from './upvoteDisabled.png';
-import downvote from './downvote.png';
-import downvoteDisabled from './downvoteDisabled.png';
+import upvote from './assets/upvote.png';
+import upvoteDisabled from './assets/upvoteDisabled.png';
+import downvote from './assets/downvote.png';
+import downvoteDisabled from './assets/downvoteDisabled.png';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
