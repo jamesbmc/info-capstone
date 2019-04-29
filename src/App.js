@@ -13,7 +13,7 @@ class App extends Component {
         );
     }
     componentDidMount() {
-        document.title = "Team Gravity";
+        document.title = "Project Gravity";
     }
 }
 
