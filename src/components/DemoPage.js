@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { Auth } from './Auth';
-import { Forum } from './Forum';
+import { Auth } from '../Auth';
+import { Forum } from './forum/Forum';
 
 export class DemoPage extends Component {
     constructor(props) {

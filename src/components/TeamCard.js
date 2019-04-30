@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
-import ischool from './assets/ischool.jpg';
+import ischool from '../assets/ischool.jpg';
 
 export class TeamCard extends Component {
     render() {

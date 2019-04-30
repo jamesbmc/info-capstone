@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CardDeck from 'react-bootstrap/CardDeck';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import { TeamCard } from './TeamCard';
-import MEMBERS from './members.json';
+import MEMBERS from '../members.json';
 
 export class ContactPage extends Component {
     render() {
