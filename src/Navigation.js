@@ -7,18 +7,18 @@ export class Navigation extends Component {
     render() {
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand>Gravity</Navbar.Brand>
+                <Navbar.Brand>Project Gravity</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
                         <LinkContainer exact to="/">
-                            <Nav.Link>Project Overview</Nav.Link>
+                            <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/contact">
-                            <Nav.Link>Meet Team Gravity</Nav.Link>
+                            <Nav.Link>About Us</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/demo">
-                            <Nav.Link>Project Demo</Nav.Link>
+                            <Nav.Link>Forum</Nav.Link>
                         </LinkContainer>
                     </Nav>
                 </Navbar.Collapse>
