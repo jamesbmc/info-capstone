@@ -17,3 +17,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* APP BAR STYLES */
+.app-bar {
+  position: 'relative';
+}
+.app-bar-title {
+  flex: 1;
+  text-align: left;
+}
+.app-bar-title a {
+  color: #000000;
+}
+.app-bar-title a:hover {
+  text-decoration: none;
+}
