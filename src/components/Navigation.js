@@ -10,18 +10,18 @@ export class Navigation extends Component {
 
         return (
             <AppBar position="static" color="default" className="app-bar">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap className="app-bar-title">
-            <Link to="/">Gravity</Link>
-          </Typography>
-          <Button component={Link} to="/contact">About</Button>
-          <Button component={Link} to="/demo">Forum</Button>
-          <Button component={Link} to="/">Resources</Button> {/* todo: update link */}
-          <Button color="primary" variant="outlined"> {/* todo: this should open a modal with signup form */}
-            Become a Member
+                <Toolbar>
+                    <Typography variant="h6" color="inherit" noWrap className="app-bar-title">
+                        <Link to="/">Gravity</Link>
+                    </Typography>
+                    <Button component={Link} to="/contact">About</Button>
+                    <Button component={Link} to="/demo">Forum</Button>
+                    <Button component={Link} to="/">Resources</Button> {/* todo: update link */}
+                    <Button color="primary" variant="outlined"> {/* todo: this should open a modal with signup form */}
+                        Become a Member
           </Button>
-        </Toolbar>
-      </AppBar>
+                </Toolbar>
+            </AppBar>
         );
     }
 }
