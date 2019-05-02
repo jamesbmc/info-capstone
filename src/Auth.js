@@ -92,7 +92,7 @@ export class Auth extends Component {
                 <div className="container">
                     {errorDiv}
                     <div className="Auth">
-                        <p>Please sign in or sign up to access patient documents:</p>
+                        <p>Sign in or sign up to access forum:</p>
                     </div>
 
                     <div className="form-group">

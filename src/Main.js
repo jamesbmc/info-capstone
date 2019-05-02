@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Switch} from 'react-router-dom';
-import { OverviewPage } from './OverviewPage';
-import { ContactPage } from './ContactPage';
-import { DemoPage } from './DemoPage';
-import { PostBody } from './PostBody';
+import { OverviewPage } from './components/OverviewPage';
+import { ContactPage } from './components/ContactPage';
+import { DemoPage } from './components/DemoPage';
+import { PostBody } from './components/forum/PostBody';
 
 export class Main extends Component {
     render() {
