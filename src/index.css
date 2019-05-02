@@ -32,3 +32,22 @@ code {
 .app-bar-title a:hover {
   text-decoration: none;
 }
+
+/* OVERVIEW PAGE STYLES */
+.splash {
+  height: 100vh;
+  background-image: url("./assets/splash.jpg");
+  background-size: cover;
+}
+.main-title {
+  color: #ffffff;
+  font-size: 3em;
+  text-align: center;
+  padding-top: 50vh;
+  padding-bottom: 6vh;
+}
+.sub-title {
+  color: #ffffff;
+  font-size: 1.5em;
+  text-align: center;
+}

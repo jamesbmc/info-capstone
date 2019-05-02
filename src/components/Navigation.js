@@ -9,7 +9,7 @@ export class Navigation extends Component {
     render() {
 
         return (
-            <AppBar position="static" color="default" className="app-bar">
+            <AppBar position="fixed" color="default" className="app-bar">
                 <Toolbar>
                     <Typography variant="h6" color="inherit" noWrap className="app-bar-title">
                         <Link to="/">Gravity</Link>
