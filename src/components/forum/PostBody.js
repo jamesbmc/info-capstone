@@ -40,12 +40,15 @@ export class PostBody extends Component {
     }
 
     render() {
+        let splitText = this.props.location.state.body.split('\n').map((item, i) => {
+            return <p key={i}>{item}</p>;
+        });
         return (
             <div style={{position: 'fixed', top: '10%'}}>
                 <h1>{this.props.location.state.title}</h1>
                 <p>{this.props.location.state.author}</p>
                 <div className="jumbotron">
-                    <p>{this.props.location.state.body}</p>
+                    {splitText}
                 </div>
                 <div align="left">
                 <textarea rows="8" cols="60" name="comment" onChange={event => this.handleChange(event)} align="left"></textarea>
