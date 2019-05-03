@@ -5,7 +5,18 @@ import { Main } from './Main';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const muiTheme = createMuiTheme({
-    /* theme stuff will go here, see: https://material-ui.com/customization/themes/ */
+    palette: {
+        primary: {
+          // light: will be calculated from palette.primary.main,
+          main: '#e99185',
+          // dark: will be calculated from palette.primary.main,
+          // contrastText: will be calculated to contrast with palette.primary.main
+        },
+        secondary: {
+          main: '#927682',
+        },
+        // error: will use the default color
+      }
 });
 
 class App extends Component {
