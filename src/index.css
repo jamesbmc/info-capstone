@@ -11,7 +11,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5eedb;
+  background-color: #efefef;
 }
 
 code {
@@ -29,7 +29,7 @@ code {
 /* APP BAR STYLES */
 .app-bar {
   position: 'relative';
-  background-color: #f5eedb !important
+  background-color: #efefef !important
 }
 .app-bar-title {
   flex: 1;
@@ -49,7 +49,7 @@ code {
   background-size: cover;
 }
 .main-title {
-  color: #f5eedb;
+  color: #efefef;
   font-size: 4em;
   text-align: center;
   padding-top: 50vh;
@@ -60,7 +60,7 @@ code {
   letter-spacing: 2px;
 }
 .sub-title {
-  color: #f5eedb;
+  color: #efefef;
   font-size: 1.1rem;
   text-align: center;
   font-weight: 600;
@@ -71,14 +71,14 @@ code {
 }
 .bg-dark {
   background-color: #2e4249;
-  color: #f5eedb;
+  color: #efefef;
 }
 .contain-sign-up {
   background-color: #2e4249;
   padding: 2rem;
   margin-left: 2rem;
   border-radius: 25px;
-  color: #f5eedb;
+  color: #efefef;
 }
 .landing-header {
   font-size: 2rem;
