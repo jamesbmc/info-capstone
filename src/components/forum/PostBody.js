@@ -41,7 +41,7 @@ export class PostBody extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{position: 'fixed', top: '10%'}}>
                 <h1>{this.props.location.state.title}</h1>
                 <p>{this.props.location.state.author}</p>
                 <div className="jumbotron">
