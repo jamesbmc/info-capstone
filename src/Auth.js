@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import Button from '@material-ui/core/Button';
 
 export class Auth extends Component {
     constructor(props) {
@@ -112,8 +113,8 @@ export class Auth extends Component {
 
                     <div className="form-group">
                         <div>
-                            <button className="btn btn-dark mr-2 mt-2" onClick={() => this.handleSignIn()}>Sign In</button>
-                            <button className="btn btn-outline-secondary mr-2 mt-2" onClick={() => this.handleSignUp()}>Sign Up</button>
+                            <Button color="primary" variant="outlined" onClick={() => this.handleSignIn()}>Sign In</Button>
+                            <Button color="primary" variant="contained" onClick={() => this.handleSignUp()}>Sign Up</Button>
                         </div>
                     </div>
                 </div>

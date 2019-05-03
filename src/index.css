@@ -29,7 +29,8 @@ code {
 /* APP BAR STYLES */
 .app-bar {
   position: 'relative';
-  background-color: #efefef !important
+  background-color: #efefef !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 .app-bar-title {
   flex: 1;
@@ -86,4 +87,9 @@ code {
   text-transform: uppercase;
   font-weight: 600;
   padding-bottom: 1rem;
+}
+
+/* FORUM STYLES */
+.forum-container {
+  padding-top: 6rem;
 }

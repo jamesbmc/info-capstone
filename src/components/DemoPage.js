@@ -3,6 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import { Auth } from '../Auth';
 import { Forum } from './forum/Forum';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 export class DemoPage extends Component {
     constructor(props) {
@@ -32,10 +33,15 @@ export class DemoPage extends Component {
 
     render() {
         return (
-            <div>
-                {!this.state.user && <Auth />}
-                {this.state.user && <Forum logout={() => this.logout()} />}
-            </div>
+            <Grid fluid className="forum-container">
+                <Row>
+                    <Col mdOffset={1} xs={12} md={10}>
+                    {!this.state.user && <Auth />}
+                    {this.state.user && <Forum logout={() => this.logout()} />}
+                    </Col>
+                </Row>
+
+            </Grid>
         );
     }
 }

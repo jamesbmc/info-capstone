@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
+import Button from '@material-ui/core/Button';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import { Comments } from './Comments';
@@ -50,7 +50,7 @@ export class PostBody extends Component {
                 <div align="left">
                 <textarea rows="8" cols="60" name="comment" onChange={event => this.handleChange(event)} align="left"></textarea>
                 <div></div>
-                <Button variant="primary" onClick={() => this.handleComment()}>
+                <Button onClick={() => this.handleComment()}>
                     Comment
                 </Button>
                 </div>
