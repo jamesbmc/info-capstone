@@ -7,21 +7,30 @@ import downvoteDisabled from '../../assets/downvoteDisabled.png';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+
 export class Post extends Component {
     handleVote(e, action) {
         e.preventDefault();
         if (action === "up") {
             if (typeof this.props.info.downvotes !== "undefined" && this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) {
                 let newDownvotes = this.props.info.downvotes.filter(id => id !== firebase.auth().currentUser.uid);
-                firebase.database().ref('posts/' + this.props.info.id).update({downvotes: newDownvotes});
+                firebase.database().ref('posts/' + this.props.info.id).update({ downvotes: newDownvotes });
             }
-            firebase.database().ref('posts/' + this.props.info.id).update({upvotes: typeof this.props.info.upvotes === "undefined" ? [firebase.auth().currentUser.uid] : this.props.info.upvotes.concat(firebase.auth().currentUser.uid)});
+            firebase.database().ref('posts/' + this.props.info.id).update({ upvotes: typeof this.props.info.upvotes === "undefined" ? [firebase.auth().currentUser.uid] : this.props.info.upvotes.concat(firebase.auth().currentUser.uid) });
         } else {
             if (typeof this.props.info.upvotes !== "undefined" && this.props.info.upvotes.includes(firebase.auth().currentUser.uid)) {
                 let newUpvotes = this.props.info.upvotes.filter(id => id !== firebase.auth().currentUser.uid);
-                firebase.database().ref('posts/' + this.props.info.id).update({upvotes: newUpvotes});
+                firebase.database().ref('posts/' + this.props.info.id).update({ upvotes: newUpvotes });
             }
-            firebase.database().ref('posts/' + this.props.info.id).update({downvotes: typeof this.props.info.downvotes === "undefined" ? [firebase.auth().currentUser.uid] : this.props.info.downvotes.concat(firebase.auth().currentUser.uid)});
+            firebase.database().ref('posts/' + this.props.info.id).update({ downvotes: typeof this.props.info.downvotes === "undefined" ? [firebase.auth().currentUser.uid] : this.props.info.downvotes.concat(firebase.auth().currentUser.uid) });
         }
     }
 
@@ -29,10 +38,10 @@ export class Post extends Component {
         e.preventDefault();
         if (action === "up") {
             let newUpvotes = this.props.info.upvotes.filter(id => id !== firebase.auth().currentUser.uid);
-            firebase.database().ref('posts/' + this.props.info.id).update({upvotes: newUpvotes});
+            firebase.database().ref('posts/' + this.props.info.id).update({ upvotes: newUpvotes });
         } else {
             let newDownvotes = this.props.info.downvotes.filter(id => id !== firebase.auth().currentUser.uid);
-            firebase.database().ref('posts/' + this.props.info.id).update({downvotes: newDownvotes});
+            firebase.database().ref('posts/' + this.props.info.id).update({ downvotes: newDownvotes });
         }
     }
 
@@ -42,7 +51,9 @@ export class Post extends Component {
         let total = upvotes - downvotes;
         return (
             <div>
-                <Link to={{
+                <Card className="post-card">
+                    <CardActionArea>
+                    <Link to={{
                     pathname: "/demo/" + this.props.info.id,
                     state: {
                         username: this.props.username,
@@ -50,20 +61,41 @@ export class Post extends Component {
                         author: this.props.info.author,
                         body: this.props.info.body
                     }
-                 }} style={{ textDecoration: 'none' }}>
-                    <div align='left' style={{backgroundColor: '#eee', padding: '1rem'}}>
-                        {(typeof this.props.info.upvotes === "undefined" || !this.props.info.upvotes.includes(firebase.auth().currentUser.uid)) && <img src={upvote} style={{ width: '3%' }} alt="Upvote icon" onClick={(e) => this.handleVote(e, "up")}/>}
-                        {(typeof this.props.info.upvotes !== "undefined" && this.props.info.upvotes.includes(firebase.auth().currentUser.uid)) && <img src={upvoteDisabled} style={{ width: '3%' }} alt="Upvote icon (disabled)" onClick={(e) => this.voidVote(e, "up")} />}
-                        <p style={{display: 'inline', color: total >= 0 ? 'green' : 'red'}}>{total}</p>
-                        {(typeof this.props.info.downvotes === "undefined" || !this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvote} style={{ width: '3%' }} alt="Downvote icon" onClick={(e) => this.handleVote(e, "down")} />}
-                        {(typeof this.props.info.downvotes !== "undefined" && this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvoteDisabled} style={{ width: '3%' }} alt="Downvote icon (disabled)" onClick={(e) => this.voidVote(e, "down")} />}
-                        <h3 style={{display: 'inline', 'marginLeft': '3rem', color:'black'}}>{this.props.info.title}</h3>
-                        <p style={{display: 'inline', 'float': 'right', color:'black'}}>{this.props.info.author + ", " + this.props.info.date}</p>
-                        {this.props.username === this.props.info.author && <p>this will be a delete button</p>}
+                }}>
+                        {/*<CardMedia
+                            component="img"
+                            alt="Contemplative Reptile"
+                            className="post-media"
+                            image="http://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg"
+                            title="Contemplative Reptile"
+                        />*/}
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">
+                            {this.props.info.title}
+          </Typography>
+                            <Typography component="p">
+                            {this.props.info.author + ", " + this.props.info.date}
+          </Typography>
+                        </CardContent>
+                        </Link>
+                    </CardActionArea>
+                    <CardActions>
+                    {(typeof this.props.info.upvotes === "undefined" || !this.props.info.upvotes.includes(firebase.auth().currentUser.uid)) && <img src={upvote} className="vote-button" alt="Upvote icon" onClick={(e) => this.handleVote(e, "up")} />}
+                        {(typeof this.props.info.upvotes !== "undefined" && this.props.info.upvotes.includes(firebase.auth().currentUser.uid)) && <img src={upvoteDisabled} className="vote-button" alt="Upvote icon (disabled)" onClick={(e) => this.voidVote(e, "up")} />}
+                        <p>{total}</p>
+                        {(typeof this.props.info.downvotes === "undefined" || !this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvote} className="vote-button" alt="Downvote icon" onClick={(e) => this.handleVote(e, "down")} />}
+                        {(typeof this.props.info.downvotes !== "undefined" && this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvoteDisabled} className="vote-button" alt="Downvote icon (disabled)" onClick={(e) => this.voidVote(e, "down")} />}
+                        {this.props.username === this.props.info.author && <Button>Delete Post</Button>}
+                    </CardActions>
+                </Card>
+
+                
+
+
+                
+                    <div>
                     </div>
-                    <div style={{paddingBottom: '.5rem'}}>
-                    </div>
-                </Link>
+                
             </div>
         )
     }

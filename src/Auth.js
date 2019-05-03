@@ -113,7 +113,7 @@ export class Auth extends Component {
 
                     <div className="form-group">
                         <div>
-                            <Button color="primary" variant="outlined" onClick={() => this.handleSignIn()}>Sign In</Button>
+                            <Button className="button-spacer" color="primary" variant="outlined" onClick={() => this.handleSignIn()}>Sign In</Button>
                             <Button color="primary" variant="contained" onClick={() => this.handleSignUp()}>Sign Up</Button>
                         </div>
                     </div>

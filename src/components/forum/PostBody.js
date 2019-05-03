@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import { Comments } from './Comments';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 export class PostBody extends Component {
     constructor(props) {
@@ -41,24 +42,27 @@ export class PostBody extends Component {
 
     render() {
         return (
-            <div>
+            <Grid fluid className="forum-container">
+                <Row>
+                    <Col mdOffset={1} xs={12} md={10}>
                 <h1>{this.props.location.state.title}</h1>
-                <p>{this.props.location.state.author}</p>
-                <div className="jumbotron">
-                    <p>{this.props.location.state.body}</p>
+                <p>by {this.props.location.state.author}</p>
+                <div className="contain-post-body">
+                    {this.props.location.state.body}
                 </div>
                 <div align="left">
-                <textarea rows="8" cols="60" name="comment" onChange={event => this.handleChange(event)} align="left"></textarea>
+                <textarea className="write-comment full-width" rows="8" cols="60" name="comment" onChange={event => this.handleChange(event)} align="left"></textarea>
                 <div></div>
-                <Button onClick={() => this.handleComment()}>
+                <Button color="primary" variant="contained" onClick={() => this.handleComment()}>
                     Comment
                 </Button>
                 </div>
-                <hr />
                 <div align="left" style={{'marginLeft': '1rem'}}>
                     <Comments postID={this.props.match.params.id} />
                 </div>
-            </div>
+            </Col>
+            </Row>
+            </Grid>
         )
     }
 }

@@ -4,6 +4,7 @@ import { Navigation } from './components/Navigation';
 import { Main } from './Main';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+
 const muiTheme = createMuiTheme({
     palette: {
         primary: {

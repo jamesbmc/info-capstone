@@ -92,13 +92,14 @@ export class Forum extends Component {
         }).map((post, i) => <Post key={i} info={post} username={Object.keys(this.state.users[firebase.auth().currentUser.uid])[0]} />);
         return (
             <div>
+                <Button color="primary" variant="contained" className="button-spacer" onClick={() => this.handleShow()}>Create a New Post</Button>
+                <Button color="primary" variant="outlined" onClick={() => this.props.logout()}>Logout</Button>
                 <div className="contain-posts">
                 {posts}
                 </div>
-                <Button color="primary" variant="contained" onClick={() => this.handleShow()}>Create a New Post</Button>
-                <Button color="primary" variant="outlined" onClick={() => this.props.logout()}>Logout</Button>
                 
-                <Modal show={this.state.show} onHide={() => this.handleClose()}>
+                
+                <Modal className="post-modal" show={this.state.show} onHide={() => this.handleClose()}>
                     <Modal.Header closeButton>
                         <Modal.Title>New Post</Modal.Title>
                     </Modal.Header>
@@ -106,12 +107,12 @@ export class Forum extends Component {
                         <div>
                             <p>Title:</p>
                             <span>         </span>
-                            <input type="text" name="title" onChange={event => this.handleChange(event)} />
+                            <input className="full-width" type="text" name="title" onChange={event => this.handleChange(event)} />
                         </div>
                         <div>
                             <p>Body:</p>
                             <span>         </span>
-                            <textarea rows="8" cols="60" name="body" onChange={event => this.handleChange(event)} />
+                            <textarea className="full-width" rows="8" cols="60" name="body" onChange={event => this.handleChange(event)} />
                         </div>
                     </Modal.Body>
                     <Modal.Footer>

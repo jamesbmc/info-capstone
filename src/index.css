@@ -26,6 +26,10 @@ code {
   margin-right: -16px !important;
   margin-left: -16px !important;
 }
+.button-spacer {
+  margin-right: 10px !important;
+}
+
 /* APP BAR STYLES */
 .app-bar {
   position: 'relative';
@@ -92,4 +96,48 @@ code {
 /* FORUM STYLES */
 .forum-container {
   padding-top: 6rem;
+}
+.contain-posts {
+  padding: 2rem 0;
+}
+
+.post-card {
+    margin-bottom: 1rem;
+}
+.post-card a:hover {
+  text-decoration: none;
+}
+.media {
+    height: 140;
+}
+.card-img {
+  height: 200px;
+  width: auto;
+}
+.vote-button {
+  width: 24px;
+}
+img.vote-button:hover {
+  cursor: pointer !important;
+}
+.post-media {
+  height: 100%;
+  width: 100%;
+}
+.full-width {
+  width: 100%;
+}
+.post-modal {
+  margin-top: 5rem;
+}
+
+/*POST BODY STYLES*/
+.contain-post-body {
+  padding: 2rem;
+  background-color: #2e4249;
+  color: #efefef;
+  margin: 1rem 0;
+}
+.write-comment {
+  border: none;
 }
