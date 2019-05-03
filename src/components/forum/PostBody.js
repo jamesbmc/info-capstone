@@ -41,6 +41,9 @@ export class PostBody extends Component {
     }
 
     render() {
+        let splitText = this.props.location.state.body.split('\n').map((item, i) => {
+            return <p key={i}>{item}</p>;
+        });
         return (
             <Grid fluid className="forum-container">
                 <Row>
