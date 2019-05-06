@@ -45,6 +45,13 @@ export class Post extends Component {
         }
     }
 
+    // make the functionality for this.
+    deletePost(messageRef) {
+        messageRef.remove();
+    }
+
+    // use this.props.info.id to delete message?
+    
     render() {
         let upvotes = typeof this.props.info.upvotes === "undefined" ? 0 : this.props.info.upvotes.length;
         let downvotes = typeof this.props.info.downvotes === "undefined" ? 0 : this.props.info.downvotes.length;
@@ -85,7 +92,7 @@ export class Post extends Component {
                         <p>{total}</p>
                         {(typeof this.props.info.downvotes === "undefined" || !this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvote} className="vote-button" alt="Downvote icon" onClick={(e) => this.handleVote(e, "down")} />}
                         {(typeof this.props.info.downvotes !== "undefined" && this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvoteDisabled} className="vote-button" alt="Downvote icon (disabled)" onClick={(e) => this.voidVote(e, "down")} />}
-                        {this.props.username === this.props.info.author && <Button>Delete Post</Button>}
+                        {this.props.username === this.props.info.author && <Button color="primary" variant="outlined" onClick={() => this.deletePost(firebase.database().ref('posts/' + this.props.info.id))}> Delete Post</Button>}
                     </CardActions>
                 </Card>
 
