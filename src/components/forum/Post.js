@@ -17,6 +17,22 @@ import Typography from '@material-ui/core/Typography';
 
 
 export class Post extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isAdmin: null
+        };
+    }
+    
+    componentWillMount() {
+        firebase.database().ref("Admin/" + this.props.username).once('value')
+            .then((snapshot) => {
+                var a = snapshot.exists();  // true
+                console.log(a);
+                this.setState({isAdmin: a});
+        });
+    }
+
     handleVote(e, action) {
         e.preventDefault();
         if (action === "up") {
@@ -47,10 +63,9 @@ export class Post extends Component {
 
     // make the functionality for this.
     deletePost(messageRef) {
+        console.log(this.state.isAdmin);
         messageRef.remove();
     }
-
-    // use this.props.info.id to delete message?
     
     render() {
         let upvotes = typeof this.props.info.upvotes === "undefined" ? 0 : this.props.info.upvotes.length;
@@ -92,7 +107,7 @@ export class Post extends Component {
                         <p>{total}</p>
                         {(typeof this.props.info.downvotes === "undefined" || !this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvote} className="vote-button" alt="Downvote icon" onClick={(e) => this.handleVote(e, "down")} />}
                         {(typeof this.props.info.downvotes !== "undefined" && this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvoteDisabled} className="vote-button" alt="Downvote icon (disabled)" onClick={(e) => this.voidVote(e, "down")} />}
-                        {this.props.username === this.props.info.author && <Button color="primary" variant="outlined" onClick={() => this.deletePost(firebase.database().ref('posts/' + this.props.info.id))}> Delete Post</Button>}
+                        {(this.props.username === this.props.info.author || this.state.isAdmin) && <Button color="primary" variant="outlined" onClick={() => this.deletePost(firebase.database().ref('posts/' + this.props.info.id))}> Delete Post</Button>}
                     </CardActions>
                 </Card>
 
