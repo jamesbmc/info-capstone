@@ -27,7 +27,7 @@ export class Post extends Component {
     componentWillMount() {
         firebase.database().ref("Admin/" + this.props.username).once('value')
             .then((snapshot) => {
-                var a = snapshot.exists();  // true
+                var a = snapshot.exists();  // true if an admin, false if not an admin
                 console.log(a);
                 this.setState({isAdmin: a});
         });
@@ -107,7 +107,7 @@ export class Post extends Component {
                         <p>{total}</p>
                         {(typeof this.props.info.downvotes === "undefined" || !this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvote} className="vote-button" alt="Downvote icon" onClick={(e) => this.handleVote(e, "down")} />}
                         {(typeof this.props.info.downvotes !== "undefined" && this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvoteDisabled} className="vote-button" alt="Downvote icon (disabled)" onClick={(e) => this.voidVote(e, "down")} />}
-                        {(this.props.username === this.props.info.author || this.state.isAdmin) && <Button color="primary" variant="outlined" onClick={() => this.deletePost(firebase.database().ref('posts/' + this.props.info.id))}> Delete Post</Button>}
+                        {(this.props.username === this.props.info.author || this.state.isAdmin) && <Button color="primary" variant="outlined" onClick={() => this.deletePost(firebase.database().ref('posts/' + this.props.info.id))}> Delete Post </Button>}
                     </CardActions>
                 </Card>
 

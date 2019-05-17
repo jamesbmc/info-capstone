@@ -1,9 +1,65 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import Button from '@material-ui/core/Button';
 
 export class OverviewPage extends Component {
+    // for member sign in
+    constructor(props) {
+        super(props);
+        this.state = {
+            fullName: '',
+            email: '',
+            userName: '',
+            errorMessage: '',
+            emailExists: false,
+        };
+    }
+
+    // for member sign in
+    componentDidMount() {
+        this.memberRef = firebase.database().ref('members');
+    }
+
+    // for member sign in
+    handleMemberSignUp() {
+        firebase.database().ref("members/" + this.state.email).once('value')
+        .then((snapshot) => {
+            var a = snapshot.exists();  // true if email exists already, false if doesn't exist.
+            console.log(a);
+            this.setState({emailExists: a});
+        });
+        if (this.state.fullName === "" || this.state.email === "") {
+            alert("One of the required fields is empty!");
+            return;
+        } else if (this.state.emailExists) {
+            alert("This email is already on our list!");
+        } else {
+            let member = {
+                email: this.email,
+                fullName: this.fullName,
+                username: this.userName,
+            };
+            this.memberRef.push(member);
+        }
+    }
+
+    // for member sign in
+    handleChange(event) {
+        let field = event.target.name; // which input
+        let value = event.target.value; // what value
+
+        let changes = {}; // object to hold changes
+        changes[field] = value; // change this field
+        this.setState(changes); // update state
+    }
+
+
     render() {
+        // bottom 2 lines for member sign in 
+        let errorDiv = this.state.errorMessage === "" ? "" : <div className="alert alert-danger">Error: {this.state.errorMessage}</div>;
+        // {errorDiv} place this somewhere nice.
         return (
             <Grid fluid>
                 <Row center="xs" className="splash">
