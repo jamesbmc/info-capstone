@@ -10,8 +10,10 @@ export class OverviewPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fullName: '',
+            firstName: '',
+            lastName: '',
             email: '',
+            zip: '',
             userName: '',
             errorMessage: '',
             emailExists: false,
@@ -20,30 +22,36 @@ export class OverviewPage extends Component {
 
     // for member sign in
     componentDidMount() {
-        this.memberRef = firebase.database().ref('members');
+        this.memberRef = firebase.database().ref('members/');
+        console.log(this.memberRef);
     }
 
     // for member sign in
     handleMemberSignUp() {
-        firebase.database().ref("members/" + this.state.email).once('value')
+        console.log(this.state.email);
+        firebase.database().ref("members/set/" + this.state.email.split('.').join("")).once('value')
         .then((snapshot) => {
             var a = snapshot.exists();  // true if email exists already, false if doesn't exist.
-            console.log(a);
             this.setState({emailExists: a});
+        })
+        .then(() => {
+            console.log(this.state.emailExists);
+            if (this.state.fullName === "" || this.state.email === "") {
+                alert("One of the required fields is empty!");
+                return;
+            } else if (this.state.emailExists) {
+                alert("This email is already on our list!");
+            } else {
+                let member = {
+                    email: this.state.email,
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    zip: this.state.zip
+                };
+                this.memberRef.push(member);
+                this.memberRef.child("set").child(this.state.email.split('.').join("")).push(1);
+            }
         });
-        if (this.state.fullName === "" || this.state.email === "") {
-            alert("One of the required fields is empty!");
-            return;
-        } else if (this.state.emailExists) {
-            alert("This email is already on our list!");
-        } else {
-            let member = {
-                email: this.email,
-                fullName: this.fullName,
-                username: this.userName,
-            };
-            this.memberRef.push(member);
-        }
     }
 
     // for member sign in
@@ -82,11 +90,11 @@ export class OverviewPage extends Component {
                         <div className="contain-sign-up">
                         {/*need to add email signup form component*/}
                         <form>
-                            <input className="form-item" type="text" name="firstname" placeholder="FIRST NAME" />
-                            <input className="form-item" type="text" name="lasttname" placeholder="LAST NAME" />
-                            <input className="form-item" type="email" name="email" placeholder="EMAIL" />
-                            <input className="form-item" type="text" name="zip" placeholder="ZIP / POSTAL CODE" />
-                            <input className="form-submit" type="submit" value="ADD YOUR NAME" />
+                            <input className="form-item" type="text" name="firstName" placeholder="FIRST NAME" value={this.state.firstName} onChange={event => this.handleChange(event)} />
+                            <input className="form-item" type="text" name="lastName" placeholder="LAST NAME" value={this.state.lastName} onChange={event => this.handleChange(event)}/>
+                            <input className="form-item" type="email" name="email" placeholder="EMAIL" value={this.state.email} onChange={event => this.handleChange(event)}/>
+                            <input className="form-item" type="text" name="zip" placeholder="ZIP / POSTAL CODE" value={this.state.zip} onChange={event => this.handleChange(event)}/>
+                            <Button className="button-spacer" color="Grey" variant="outlined" onClick={() => this.handleMemberSignUp()}>ADD YOUR NAME</Button>
                         </form>
                         </div>
                     </Col>
