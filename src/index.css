@@ -11,7 +11,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #efefef;
+  background-color: #eeeeee;
+  color: #111111;
 }
 
 code {
@@ -33,7 +34,7 @@ code {
 /* APP BAR STYLES */
 .app-bar {
   position: 'relative';
-  background-color: #efefef !important;
+  background-color: #eeeeee !important;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 .app-bar-title {
@@ -54,7 +55,7 @@ code {
   background-size: cover;
 }
 .main-title {
-  color: #efefef;
+  color: #eeeeee;
   font-size: 4em;
   text-align: center;
   padding-top: 50vh;
@@ -65,7 +66,7 @@ code {
   letter-spacing: 2px;
 }
 .sub-title {
-  color: #efefef;
+  color: #eeeeee;
   font-size: 1.1rem;
   text-align: center;
   font-weight: 600;
@@ -74,16 +75,20 @@ code {
 .content-row {
   padding: 5rem 0;
 }
-.bg-dark {
-  background-color: #2e4249;
-  color: #efefef;
+.bg-blue {
+  background-color: #326273;
+  color: #111111 !important;
+}
+.bg-green {
+  background-color: #acdd8e;
+  color: #111111 !important;
 }
 .contain-sign-up {
-  background-color: #2e4249;
+  background-color: #326273;
   padding: 2rem;
   margin-left: 2rem;
   border-radius: 25px;
-  color: #efefef;
+  color: #eeeeee;
 }
 .landing-header {
   font-size: 2rem;
@@ -91,6 +96,29 @@ code {
   text-transform: uppercase;
   font-weight: 600;
   padding-bottom: 1rem;
+}
+.form-item {
+  border-radius: 20px;
+  width: 100%;
+  margin: .3rem 0;
+  padding: 8px 15px 8px 15px;
+  height: 40px;
+  font-family: "Oswald";
+  text-transform: uppercase;
+  border: none;
+}
+.form-item:focus, .form-submit:focus {
+  outline: none;
+}
+.form-submit {
+  border-radius: 15px;
+  width: 100%;
+  margin: .3rem 0;
+  padding-bottom: 3px;
+  height: 30px;
+  font-family: "Oswald";
+  font-size: .9rem;
+  border: none;
 }
 
 /* FORUM STYLES */
@@ -134,8 +162,8 @@ img.vote-button:hover {
 /*POST BODY STYLES*/
 .contain-post-body {
   padding: 2rem;
-  background-color: #2e4249;
-  color: #efefef;
+  background-color: #326273;
+  color: #eeeeee;
   margin: 1rem 0;
 }
 .write-comment {

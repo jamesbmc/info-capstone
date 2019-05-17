@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -65,24 +66,33 @@ export class OverviewPage extends Component {
                 <Row center="xs" className="splash">
                     <Col lg={8} xs={10}>
                         <div className="main-title">Project Gravity</div>
-                        <div className="sub-title">Advocating for pulling together electronic health records solutions across the United States.</div>
+                        <div className="sub-title">Unified people for a unified EHR system.</div>
                     </Col>
                 </Row>
                 <Row className="content-row">
                     <Col xsOffset={1} xs={10} md={6}>
                     
                         <h1 className="landing-header">Together, we can build a better EHR. Join the movement.</h1>
-                        <p>Some blurb will probably go here.</p>
+                        <p>Bringing patients, clinicians, and health care leaders together to create a market demand for robust interoperability between electronic health record (EHR) systems. Add your name for the latest updates.</p>
+                        <Button color="primary" variant="contained" component={Link} to="/contact">
+                            Learn More
+                        </Button>
                     </Col>
                     <Col xs={10} md={4}>
                         <div className="contain-sign-up">
                         {/*need to add email signup form component*/}
-                        This is where the membership signup form will go.
+                        <form>
+                            <input className="form-item" type="text" name="firstname" placeholder="FIRST NAME" />
+                            <input className="form-item" type="text" name="lasttname" placeholder="LAST NAME" />
+                            <input className="form-item" type="email" name="email" placeholder="EMAIL" />
+                            <input className="form-item" type="text" name="zip" placeholder="ZIP / POSTAL CODE" />
+                            <input className="form-submit" type="submit" value="ADD YOUR NAME" />
+                        </form>
                         </div>
                     </Col>
                 </Row>
 
-                <Row className="content-row bg-dark">
+                <Row className="content-row bg-green">
                 <Col xsOffset={1} xs={10}>
                     <p>
                         The problem of information sharing across different hospitals and healthcare systems is a huge issue in the medical field.
@@ -93,7 +103,6 @@ export class OverviewPage extends Component {
                         formats and transmission of those documents. Our goal is creating an accessible repository with information as to why this consolidation is a worthy cause, and
                         a place to start a discussion on how to achieve mandatory consolidation or interoperability standards through reaching out to state and national legislators.
                 </p>
-                <Button variant="contained" color="primary">Learn More</Button>
                 </Col>
                 </Row>
 
@@ -105,7 +114,7 @@ export class OverviewPage extends Component {
                 </Col>
                 </Row>
 
-                <Row between="xs" className="content-row bg-dark">
+                <Row between="xs" className="content-row bg-blue">
                     <Col xsOffset={1} xs={12} md={3}>
                     {/*need to add email signup form component*/}
                     footer column 1
