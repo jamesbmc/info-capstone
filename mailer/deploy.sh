@@ -4,4 +4,4 @@
 docker push jamesbmc/gravity-mailer
 
 # TODO: replace with new droplet IP address
-ssh root@134.209.5.145 'bash -s' < upgrade-server.sh
+ssh root@157.230.171.202 'bash -s' < upgrade-server.sh

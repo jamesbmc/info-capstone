@@ -2,7 +2,7 @@ const express = require("express");
 const firebase_config = require("./FirebaseConfig.json");
 const email_config = require("./EmailConfig.json");
 const firebase = require('firebase');
-const seconds_in_day = 86400000;
+const milliseconds_in_day = 86400000;
 const nodemailer = require('nodemailer');
 
 firebase.initializeApp(firebase_config);
@@ -95,7 +95,7 @@ app.listen(port, host, () => {
         } else {
             console.log('no recent posts');
         }
-    }, 30000);
+    }, milliseconds_in_day);
 
     console.log(`server is listening at http://${addr}...`);
 });

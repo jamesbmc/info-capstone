@@ -10,7 +10,7 @@
             ".indexOn": "date"
         },
         "comments": {
-            ".read": "auth != null",
+            ".read": true,
             ".write": "auth != null",
             ".indexOn": ["date", "postID"]
         },
