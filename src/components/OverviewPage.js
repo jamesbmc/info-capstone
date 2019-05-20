@@ -14,9 +14,8 @@ export class OverviewPage extends Component {
             lastName: '',
             email: '',
             zip: '',
-            userName: '',
             errorMessage: '',
-            emailExists: false,
+            emailExists: false
         };
     }
 
