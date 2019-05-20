@@ -45,7 +45,7 @@ app.listen(port, host, () => {
         members = memberArray;
     });
 
-    let pastDay = new Date().getTime() - (2400 * 3600 * 1000);
+    let pastDay = new Date().getTime() - (24 * 3600 * 1000);
     let postRef = firebase.database().ref('posts').orderByChild('date').startAt(pastDay);
     postRef.on('value', (snapshot) => {
         let postsObject = snapshot.val();
