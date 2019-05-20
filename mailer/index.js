@@ -45,7 +45,7 @@ app.listen(port, host, () => {
         members = memberArray;
     });
 
-    let pastDay = new Date().getTime() - (24 * 3600 * 1000);
+    let pastDay = new Date().getTime() - (2400 * 3600 * 1000);
     let postRef = firebase.database().ref('posts').orderByChild('date').startAt(pastDay);
     postRef.on('value', (snapshot) => {
         let postsObject = snapshot.val();
@@ -95,7 +95,7 @@ app.listen(port, host, () => {
         } else {
             console.log('no recent posts');
         }
-    }, seconds_in_day);
+    }, 30000);
 
     console.log(`server is listening at http://${addr}...`);
 });
@@ -108,8 +108,8 @@ async function sendEmail(email, name, posts) {
   };
 
   mailOptions.subject = `Your Project Gravity Daily Digest`;
-  let emailHtml = `<p>Hey ${name || ''}! Below are the Project Gravity posts from today:</p><br>`
-    + posts.map(post => '<p>' + post.title + '</p>').join("") +
+  let emailHtml = `<p>Hey ${name || ''}! Below are the Project Gravity posts from today:</p>`
+    + posts.map(post => '<br><a href="https://gravity-28052.firebaseapp.com/demo/'+ post.id + '">' + post.title + '</a>').join("") +
     '<br><p>Anything sound interesting? <a href="https://gravity-28052.firebaseapp.com/demo/">Join the discussion!</a></p>';
   mailOptions.html = emailHtml;
   await mailTransport.sendMail(mailOptions);

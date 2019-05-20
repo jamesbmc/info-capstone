@@ -23,7 +23,7 @@ export class Post extends Component {
             isAdmin: null
         };
     }
-    
+
     componentWillMount() {
         firebase.database().ref("Admin/" + this.props.username).once('value')
             .then((snapshot) => {
@@ -66,7 +66,7 @@ export class Post extends Component {
         console.log(this.state.isAdmin);
         messageRef.remove();
     }
-    
+
     render() {
         let upvotes = typeof this.props.info.upvotes === "undefined" ? 0 : this.props.info.upvotes.length;
         let downvotes = typeof this.props.info.downvotes === "undefined" ? 0 : this.props.info.downvotes.length;
@@ -76,13 +76,7 @@ export class Post extends Component {
                 <Card className="post-card">
                     <CardActionArea>
                     <Link to={{
-                    pathname: "/demo/" + this.props.info.id,
-                    state: {
-                        username: this.props.username,
-                        title: this.props.info.title,
-                        author: this.props.info.author,
-                        body: this.props.info.body
-                    }
+                    pathname: "/demo/" + this.props.info.id
                 }}>
                         {/*<CardMedia
                             component="img"
@@ -111,13 +105,13 @@ export class Post extends Component {
                     </CardActions>
                 </Card>
 
-                
 
 
-                
+
+
                     <div>
                     </div>
-                
+
             </div>
         )
     }
