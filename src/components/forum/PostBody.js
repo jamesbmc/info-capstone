@@ -51,7 +51,7 @@ export class PostBody extends Component {
                 <h1>{this.props.location.state.title}</h1>
                 <p>by {this.props.location.state.author}</p>
                 <div className="contain-post-body">
-                    {this.props.location.state.body}
+                    {splitText}
                 </div>
                 <div align="left">
                 <textarea className="write-comment full-width" rows="8" cols="60" name="comment" onChange={event => this.handleChange(event)} align="left"></textarea>

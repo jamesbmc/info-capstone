@@ -66,7 +66,7 @@ export class OverviewPage extends Component {
 
 
     render() {
-        // bottom 2 lines for member sign in 
+        // bottom 2 lines for member sign in
         let errorDiv = this.state.errorMessage === "" ? "" : <div className="alert alert-danger">Error: {this.state.errorMessage}</div>;
         // {errorDiv} place this somewhere nice.
         return (
@@ -79,8 +79,8 @@ export class OverviewPage extends Component {
                 </Row>
                 <Row className="content-row">
                     <Col xsOffset={1} xs={10} md={6}>
-                    
-                        <h1 className="landing-header">Together, we can build a better EHR. Join the movement.</h1>
+
+                        <h1 className="landing-header">Together, we can build a better EHR system. Join the movement.</h1>
                         <p>Bringing patients, clinicians, and health care leaders together to create a market demand for robust interoperability between electronic health record (EHR) systems. Add your name for the latest updates.</p>
                         <Button color="primary" variant="contained" component={Link} to="/contact">
                             Learn More

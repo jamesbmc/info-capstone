@@ -5,13 +5,18 @@
             ".write": true
         },
         "posts": {
-            ".read": "auth != null",
-            ".write": "auth != null"
+            ".read": true,
+            ".write": "auth != null",
+            ".indexOn": "date"
         },
         "comments": {
             ".read": "auth != null",
             ".write": "auth != null",
             ".indexOn": ["date", "postID"]
+        },
+        "members": {
+          ".read": true,
+          ".write": true
         }
     }
 }
