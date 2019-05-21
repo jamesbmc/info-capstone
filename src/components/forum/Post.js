@@ -6,7 +6,9 @@ import downvote from '../../assets/downvote.png';
 import downvoteDisabled from '../../assets/downvoteDisabled.png';
 import firebase from 'firebase/app';
 import 'firebase/database';
-
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -21,7 +23,7 @@ export class Post extends Component {
         super(props);
         this.state = {
             isAdmin: null,
-            imagePreview: ''
+            imagePreview: '',
         };
     }
 
@@ -63,9 +65,21 @@ export class Post extends Component {
         }
     }
 
-    // make the functionality for this.
+    // make sure it deletes the storage image when doing this.
     deletePost(messageRef) {
+        if (this.props.info.imgUrl !== '') {
+            var storageRef = firebase.storage().ref();
+            console.log(this.props.info.imgFullPath);
+            var deleteRef = storageRef.child(this.props.info.imgFullPath);
+            // Delete the file
+            deleteRef.delete().then(function() {
+                // File deleted successfully
+            }).catch(function(error) {
+                // an error occurred!
+            });
+        }
         messageRef.remove();
+
     }
 
     render() {

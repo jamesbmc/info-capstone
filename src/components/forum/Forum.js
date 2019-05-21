@@ -22,7 +22,7 @@ export class Forum extends Component {
             file: "",
             imagePreviewUrl: "", //added
             url: '',
-            imagePath: ''
+            imagePath: '',
         };
     }
 
@@ -36,6 +36,7 @@ export class Forum extends Component {
                     return {
                         id: id,
                         imgUrl: posts[id].imgUrl,
+                        imgFullPath: posts[id].imgFullPath,
                         title: posts[id].title,
                         body: posts[id].body,
                         author: posts[id].author,
@@ -91,6 +92,8 @@ export class Forum extends Component {
             var user = firebase.auth().currentUser;
             var email = user.email;
             var uploadTask = storageRef.child(email).child('images/' + file.name).put(file, metadata);
+            this.setState({imagePath: email + "/" + 'images/' + file.name});
+            console.log(this.state.imagePath);
             uploadTask.on('state_changed', function (snapshot) {
                 // Observe state change events such as progress, pause, and resume
                 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
@@ -157,10 +160,12 @@ export class Forum extends Component {
             }, () => {
                 // Handle successful uploads on complete
                 // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                // test imgName for then deleting later.
                 uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                     let newPost = {
                         title: this.state.title,
                         imgUrl: downloadURL,
+                        imgFullPath: this.state.imagePath,
                         body: this.state.body,
                         author: Object.keys(this.state.users[firebase.auth().currentUser.uid])[0],
                         date: new Date().getTime(),
