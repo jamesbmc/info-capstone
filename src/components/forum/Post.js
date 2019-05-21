@@ -97,7 +97,7 @@ export class Post extends Component {
                 <Card className="post-card">
                     <CardActionArea>
                     <Link to={{
-                    pathname: "/demo/" + this.props.info.id
+                    pathname: "/forum/" + this.props.info.id
                 }}>
                         {<CardMedia
                             component="img"

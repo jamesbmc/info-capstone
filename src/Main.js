@@ -11,8 +11,8 @@ export class Main extends Component {
             <Switch>
                 <Route exact path='/' component={OverviewPage} />
                 <Route exact path='/contact' component={ContactPage} />
-                <Route exact path='/demo' component={DemoPage} />
-                <Route path='/demo/:id' component={PostBody} />
+                <Route exact path='/forum' component={DemoPage} />
+                <Route path='/forum/:id' component={PostBody} />
             </Switch>
         );
     }
