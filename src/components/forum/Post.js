@@ -20,7 +20,8 @@ export class Post extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAdmin: null
+            isAdmin: null,
+            imagePreview: ''
         };
     }
     
@@ -31,6 +32,7 @@ export class Post extends Component {
                 console.log(a);
                 this.setState({isAdmin: a});
         });
+        this.setState({imagePreview: this.props.info.imgUrl});
     }
 
     handleVote(e, action) {
@@ -63,7 +65,6 @@ export class Post extends Component {
 
     // make the functionality for this.
     deletePost(messageRef) {
-        console.log(this.state.isAdmin);
         messageRef.remove();
     }
     
@@ -71,6 +72,12 @@ export class Post extends Component {
         let upvotes = typeof this.props.info.upvotes === "undefined" ? 0 : this.props.info.upvotes.length;
         let downvotes = typeof this.props.info.downvotes === "undefined" ? 0 : this.props.info.downvotes.length;
         let total = upvotes - downvotes;
+        let $image = null;
+        if (this.state.imagePreview) {
+            $image = this.state.imagePreview;
+        } else {
+            $image = '';
+        }
         return (
             <div>
                 <Card className="post-card">
@@ -84,13 +91,13 @@ export class Post extends Component {
                         body: this.props.info.body
                     }
                 }}>
-                        {/*<CardMedia
+                        {<CardMedia
                             component="img"
-                            alt="Contemplative Reptile"
+                            alt=""
                             className="post-media"
-                            image="http://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg"
-                            title="Contemplative Reptile"
-                        />*/}
+                            image= {$image}
+                            title=""
+                        />}
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
                             {this.props.info.title}

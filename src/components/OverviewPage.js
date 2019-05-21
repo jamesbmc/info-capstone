@@ -23,12 +23,11 @@ export class OverviewPage extends Component {
     // for member sign in
     componentDidMount() {
         this.memberRef = firebase.database().ref('members/');
-        console.log(this.memberRef);
     }
 
     // for member sign in
     handleMemberSignUp() {
-        console.log(this.state.email);
+        // must take away period since firebase doesn't allow them.
         firebase.database().ref("members/set/" + this.state.email.split('.').join("")).once('value')
         .then((snapshot) => {
             var a = snapshot.exists();  // true if email exists already, false if doesn't exist.
@@ -49,6 +48,7 @@ export class OverviewPage extends Component {
                     zip: this.state.zip
                 };
                 this.memberRef.push(member);
+                // use this to check if that email already exists.
                 this.memberRef.child("set").child(this.state.email.split('.').join("")).push(1);
             }
         });

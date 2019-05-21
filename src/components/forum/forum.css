@@ -1,0 +1,8 @@
+.imgPreview img {
+    width: 100%;
+}
+
+.footer-modal {
+    position: relative;
+    bottom: 40px;
+}
