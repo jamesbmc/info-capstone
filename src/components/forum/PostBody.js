@@ -9,12 +9,32 @@ export class PostBody extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           comment: ""
+           comment: "",
+           post: {
+               title: "",
+               author: "",
+               body: ""
+           }
         };
     }
 
     componentDidMount() {
         this.commentRef = firebase.database().ref('comments/');
+        this.postRef = firebase.database().ref('posts/' + this.props.match.params.id);
+        this.postRef.on('value', (snapshot) => {
+            let post = snapshot.val();
+            if (post != null) {
+                this.setState({ post: post });
+            } else {
+                this.setState({
+                    post: {
+                        title: "",
+                        author: "",
+                        body: ""
+                    }
+                });
+            }
+        });
     }
 
     handleChange(event) {
@@ -28,10 +48,12 @@ export class PostBody extends Component {
 
     handleComment() {
         if (this.state.comment === "") {
-            alert("Please enter a comment!")
+            alert("Please enter a comment!");
+        } else if (firebase.auth().currentUser == null) {
+            alert("Please log in to comment!");
         } else {
             let comment = {
-                creator: this.props.location.state.username,
+                creator: firebase.auth().currentUser.displayName,
                 body: this.state.comment,
                 postID: this.props.match.params.id,
                 date: new Date().getTime()
@@ -41,17 +63,17 @@ export class PostBody extends Component {
     }
 
     render() {
-        let splitText = this.props.location.state.body.split('\n').map((item, i) => {
+        let splitText = this.state.post.body.split('\n').map((item, i) => {
             return <p key={i}>{item}</p>;
         });
         return (
             <Grid fluid className="forum-container">
                 <Row>
                     <Col mdOffset={1} xs={12} md={10}>
-                <h1>{this.props.location.state.title}</h1>
-                <p>by {this.props.location.state.author}</p>
+                <h1>{this.state.post.title}</h1>
+                <p>by {this.state.post.author}</p>
                 <div className="contain-post-body">
-                    {this.props.location.state.body}
+                    {splitText}
                 </div>
                 <div align="left">
                 <textarea className="write-comment full-width" rows="8" cols="60" name="comment" onChange={event => this.handleChange(event)} align="left"></textarea>
