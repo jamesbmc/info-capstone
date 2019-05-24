@@ -221,8 +221,8 @@ export class Forum extends Component {
         }).map((post, i) => <Post key={i} info={post} username={Object.keys(this.state.users[firebase.auth().currentUser.uid])[0]} />);
         return (
             <div>
-                <Button color="primary" variant="contained" className="button-spacer" onClick={() => this.handleShow()}>Create a New Post</Button>
-                <Button color="primary" variant="outlined" onClick={() => this.props.logout()}>Logout</Button>
+                <Button color="primary" variant="contained" className="button-style button-spacer" onClick={() => this.handleShow()}>Create a New Post</Button>
+                <Button color="primary" variant="outlined" className="button-style" onClick={() => this.props.logout()}>Logout</Button>
                 <div className="contain-posts">
                 {posts}
                 </div>
@@ -257,10 +257,10 @@ export class Forum extends Component {
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="footer-modal"> 
-                        <Button color="primary" variant="contained" onClick={() => this.handleClose()}>
+                        <Button className="button-style" color="primary" variant="contained" onClick={() => this.handleClose()}>
                             Close
                         </Button>
-                        <Button color="primary" variant="outlined" onClick={() => this.post()}>
+                        <Button className="button-style" color="primary" variant="outlined" onClick={() => this.post()}>
                             Post
                         </Button>
                     </Modal.Footer>

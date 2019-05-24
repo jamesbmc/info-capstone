@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Jumbotron from 'react-bootstrap/Jumbotron';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 export class Resources extends Component {
     render() {
         return (
-            <Jumbotron>
+            <Grid fluid className="main-container">
                 <h1>Resources</h1>
                 <p>Links to external research and websites related to Project Gravity.</p>
                 <h4>Electronic Health/Medical Records</h4>
@@ -25,7 +25,7 @@ export class Resources extends Component {
                     <li><a href="https://ehrintelligence.com/features/breakdown-of-health-it-interoperability-standards-organizations">Breakdown of Health IT Interoperability Standards and Organizations - EHR Intelligence</a></li>
                     <li><a href="https://healthitanalytics.com/news/data-standards-security-key-to-healthcare-interoperability">Data Standards, Security Key to Healthcare Interoperability - HealthITAnalytics</a></li>
                 </ul>
-            </Jumbotron>
+            </Grid>
         );
     }
 }

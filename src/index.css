@@ -30,6 +30,12 @@ code {
 .button-spacer {
   margin-right: 10px !important;
 }
+.button-style {
+  border-radius: 25px !important;
+}
+.main-container {
+  padding-top: 6rem;
+}
 
 /* APP BAR STYLES */
 .app-bar {
@@ -119,6 +125,10 @@ code {
   font-family: "Oswald";
   font-size: .9rem;
   border: none;
+}
+.sign-up-button {
+  margin-top: .3rem !important;
+  width: 100%;
 }
 
 /* FORUM STYLES */
