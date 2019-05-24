@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Navigation } from './components/Navigation';
 import { Main } from './Main';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 
 const theme = createMuiTheme({
@@ -16,10 +15,10 @@ const theme = createMuiTheme({
 class App extends Component {
     render() {
         return (
-            <ThemeProvider theme={theme}>
+            <MuiThemeProvider theme={theme}>
                 <Navigation />
                 <Main />
-            </ThemeProvider>
+            </MuiThemeProvider>
         );
     }
     componentDidMount() {
