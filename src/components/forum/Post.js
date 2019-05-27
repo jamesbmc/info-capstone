@@ -31,7 +31,6 @@ export class Post extends Component {
         firebase.database().ref("Admin/" + this.props.username).once('value')
             .then((snapshot) => {
                 var a = snapshot.exists();  // true if an admin, false if not an admin
-                console.log(a);
                 this.setState({isAdmin: a});
         });
         this.setState({imagePreview: this.props.info.imgUrl});
@@ -65,7 +64,6 @@ export class Post extends Component {
         }
     }
 
-    // make sure it deletes the storage image when doing this.
     deletePost(messageRef) {
         if (this.props.info.imgUrl !== '') {
             var storageRef = firebase.storage().ref();
@@ -77,7 +75,7 @@ export class Post extends Component {
             }).catch(function(error) {
                 // an error occurred!
             });
-        }
+        } 
         messageRef.remove();
 
     }
