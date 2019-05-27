@@ -80,10 +80,10 @@ export class Navigation extends Component {
                     <Typography variant="h6" color="inherit" noWrap className="app-bar-title">
                         <Link to="/">Gravity</Link>
                     </Typography>
-                    <Button className="button-spacer" component={Link} to="/contact">About</Button>
-                    <Button className="button-spacer" component={Link} to="/demo">Forum</Button>
-                    <Button className="button-spacer" component={Link} to="/">Resources</Button> {/* todo: update link */}
-                    <Button color="primary" variant="outlined" onClick={() => this.handleShow()}>
+                    <Button className="button-style button-spacer" component={Link} to="/contact">About</Button>
+                    <Button className="button-style button-spacer" component={Link} to="/forum">Forum</Button>
+                    <Button className="button-style button-spacer" component={Link} to="/resources">Resources</Button> 
+                    <Button className="button-style" color="primary" variant="outlined" onClick={() => this.handleShow()}>
                         Become a Member
                     </Button>
                 </Toolbar>
@@ -114,10 +114,10 @@ export class Navigation extends Component {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="primary" variant="contained" onClick={() => this.handleClose()}>
+                        <Button className="button-style" color="primary" variant="contained" onClick={() => this.handleClose()}>
                             Close
                         </Button>
-                        <Button color="primary" variant="outlined" onClick={() => this.handleMemberSignUp()}>
+                        <Button className="button-style" color="primary" variant="outlined" onClick={() => this.handleMemberSignUp()}>
                             Add Your Name
                         </Button>
                     </Modal.Footer>

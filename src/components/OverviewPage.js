@@ -81,9 +81,14 @@ export class OverviewPage extends Component {
 
                         <h1 className="landing-header">Together, we can build a better EHR system. Join the movement.</h1>
                         <p>Bringing patients, clinicians, and health care leaders together to create a market demand for robust interoperability between electronic health record (EHR) systems. Add your name for the latest updates.</p>
-                        <Button color="primary" variant="contained" component={Link} to="/contact">
+                        <Button  className="button-style" color="primary" variant="contained" component={Link} to="/contact">
                             Learn More
                         </Button>
+
+                        Test buttons:
+                        <Button color="primary">Primary</Button>
+                        <Button color="secondary">Secondary</Button>
+
                     </Col>
                     <Col xs={10} md={4}>
                         <div className="contain-sign-up">
@@ -93,7 +98,7 @@ export class OverviewPage extends Component {
                             <input className="form-item" type="text" name="lastName" placeholder="LAST NAME" value={this.state.lastName} onChange={event => this.handleChange(event)}/>
                             <input className="form-item" type="email" name="email" placeholder="EMAIL" value={this.state.email} onChange={event => this.handleChange(event)}/>
                             <input className="form-item" type="text" name="zip" placeholder="ZIP / POSTAL CODE" value={this.state.zip} onChange={event => this.handleChange(event)}/>
-                            <Button className="button-spacer" color="Grey" variant="outlined" onClick={() => this.handleMemberSignUp()}>ADD YOUR NAME</Button>
+                            <Button className="button-style sign-up-button" variant="outlined" onClick={() => this.handleMemberSignUp()}>ADD YOUR NAME</Button>
                         </form>
                         </div>
                     </Col>

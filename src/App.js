@@ -3,27 +3,19 @@ import './App.css';
 import { Navigation } from './components/Navigation';
 import { Main } from './Main';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import purple from '@material-ui/core/colors/purple';
 
-
-const muiTheme = createMuiTheme({
-    palette: {
-        primary: {
-          // light: will be calculated from palette.primary.main,
-          main: '#e99185',
-          // dark: will be calculated from palette.primary.main,
-          // contrastText: will be calculated to contrast with palette.primary.main
-        },
-        secondary: {
-          main: '#927682',
-        },
-        // error: will use the default color
-      }
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: purple[500] },
+    secondary: { main: '#11cb5f' },
+  },
 });
 
 class App extends Component {
     render() {
         return (
-            <MuiThemeProvider muiTheme={muiTheme}>
+            <MuiThemeProvider theme={theme}>
                 <Navigation />
                 <Main />
             </MuiThemeProvider>

@@ -95,7 +95,7 @@ export class Post extends Component {
                 <Card className="post-card">
                     <CardActionArea>
                     <Link to={{
-                    pathname: "/demo/" + this.props.info.id
+                    pathname: "/forum/" + this.props.info.id
                 }}>
                         {<CardMedia
                             component="img"
@@ -120,7 +120,7 @@ export class Post extends Component {
                         <p>{total}</p>
                         {(typeof this.props.info.downvotes === "undefined" || !this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvote} className="vote-button" alt="Downvote icon" onClick={(e) => this.handleVote(e, "down")} />}
                         {(typeof this.props.info.downvotes !== "undefined" && this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvoteDisabled} className="vote-button" alt="Downvote icon (disabled)" onClick={(e) => this.voidVote(e, "down")} />}
-                        {(this.props.username === this.props.info.author || this.state.isAdmin) && <Button color="primary" variant="outlined" onClick={() => this.deletePost(firebase.database().ref('posts/' + this.props.info.id))}> Delete Post </Button>}
+                        {(this.props.username === this.props.info.author || this.state.isAdmin) && <Button className="button-style" color="primary" variant="outlined" onClick={() => this.deletePost(firebase.database().ref('posts/' + this.props.info.id))}> Delete Post </Button>}
                     </CardActions>
                 </Card>
 

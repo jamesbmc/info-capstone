@@ -86,7 +86,7 @@ export class PostBody extends Component {
                 <div align="left">
                 <textarea className="write-comment full-width" rows="8" cols="60" name="comment" onChange={event => this.handleChange(event)} align="left"></textarea>
                 <div></div>
-                <Button color="primary" variant="contained" onClick={() => this.handleComment()}>
+                <Button className="button-style" color="primary" variant="contained" onClick={() => this.handleComment()}>
                     Comment
                 </Button>
                 </div>
