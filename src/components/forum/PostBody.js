@@ -13,7 +13,8 @@ export class PostBody extends Component {
            post: {
                title: "",
                author: "",
-               body: ""
+               body: "",
+               link: false,
            }
         };
     }
@@ -30,7 +31,8 @@ export class PostBody extends Component {
                     post: {
                         title: "",
                         author: "",
-                        body: ""
+                        body: "",
+                        link: false,
                     }
                 });
             }
@@ -63,9 +65,15 @@ export class PostBody extends Component {
     }
 
     render() {
-        let splitText = this.state.post.body.split('\n').map((item, i) => {
-            return <p key={i}>{item}</p>;
-        });
+        let $linker = null;
+        if (this.state.post.link) {
+            $linker = (<a href = {this.state.post.body}
+            title="The link given">{this.state.post.body}</a>);
+        } else {
+           $linker = (this.state.post.body.split('\n').map((item, i) => {
+            return <p key={i}>{item}</p>;})
+            );
+        }
         return (
             <Grid fluid className="forum-container">
                 <Row>
@@ -73,7 +81,7 @@ export class PostBody extends Component {
                 <h1>{this.state.post.title}</h1>
                 <p>by {this.state.post.author}</p>
                 <div className="contain-post-body">
-                    {splitText}
+                    {$linker}
                 </div>
                 <div align="left">
                 <textarea className="write-comment full-width" rows="8" cols="60" name="comment" onChange={event => this.handleChange(event)} align="left"></textarea>

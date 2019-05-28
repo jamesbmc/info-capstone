@@ -23,6 +23,7 @@ export class Forum extends Component {
             imagePreviewUrl: "", //added
             url: '',
             imagePath: '',
+            link: false,
         };
     }
 
@@ -112,45 +113,32 @@ export class Forum extends Component {
                 switch (error.code) {
                     case 'storage/unauthorized':
                         break;
-
                     case 'storage/canceled':
                         break;
-
                     case 'storage/unknown':
                         break;
                     case 'storage/object_not_found':
                         break;
-
                     case 'storage/bucket_not_found':
                         break;
-
                     case 'storage/quota_exceeded':
                         break;
-
                     case 'storage/unauthenticated':
                         break;
-
                     case 'storage/invalid_checksum':
                         break;
-
                     case 'storage/retry_limit_exceeded':
                         break;
-
                     case 'storage/invalid_event_name':
                         break;
-
                     case 'storage/invalid_url':
                         break;
-
                     case 'storage/invalid-argument':
                         break;
-
                     case 'storage/no_default_bucket':
                         break;
-
                     case 'storage/cannot_slice_blob':
                         break;
-
                     case 'storage/server_wrong_file_size	':
                         break;
                     default:
@@ -166,6 +154,7 @@ export class Forum extends Component {
                         title: this.state.title,
                         imgUrl: downloadURL,
                         imgFullPath: this.state.imagePath,
+                        link: this.state.link,
                         body: this.state.body,
                         author: Object.keys(this.state.users[firebase.auth().currentUser.uid])[0],
                         date: new Date().getTime(),
@@ -179,6 +168,7 @@ export class Forum extends Component {
             let newPost = {
                 title: this.state.title,
                 imgUrl: "",
+                link: this.state.link,
                 body: this.state.body,
                 author: Object.keys(this.state.users[firebase.auth().currentUser.uid])[0],
                 date: new Date().getTime(),
@@ -203,10 +193,16 @@ export class Forum extends Component {
     }
 
 
+    
+    handleLink() {
+        this.setState({link: true});
+        this.handleShow();
+    }
+
+
     render() {
         let { imagePreviewUrl } = this.state;
         let $imagePreview = null;
-        let checkUrl = this.state.url.length > 0;
         if (imagePreviewUrl) {
             $imagePreview = (<img className="imgPreview.img" alt="preview of what is being displayed" src={imagePreviewUrl} />)
         } else {
@@ -222,9 +218,10 @@ export class Forum extends Component {
         return (
             <div>
                 <Button color="primary" variant="contained" className="button-style button-spacer" onClick={() => this.handleShow()}>Create a New Post</Button>
+                <Button color="primary" variant="contained" className="button-style button-spacer" onClick={() => this.handleLink()}>Create a New Link Post</Button>
                 <Button color="primary" variant="outlined" className="button-style" onClick={() => this.props.logout()}>Logout</Button>
                 <div className="contain-posts">
-                {posts}
+                    {posts}
                 </div>
                 
                 
