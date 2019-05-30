@@ -80,9 +80,9 @@ export class Navigation extends Component {
                     <Typography variant="h6" color="inherit" noWrap className="app-bar-title">
                         <Link to="/">Gravity</Link>
                     </Typography>
-                    <Button className="button-style button-spacer" component={Link} to="/contact">About</Button>
-                    <Button className="button-style button-spacer" component={Link} to="/forum">Forum</Button>
-                    <Button className="button-style button-spacer" component={Link} to="/resources">Resources</Button> 
+                    <Button className="button-style button-spacer nav-buttons" component={Link} to="/contact">About</Button>
+                    <Button className="button-style button-spacer nav-buttons" component={Link} to="/forum">Forum</Button>
+                    <Button className="button-style button-spacer nav-buttons" component={Link} to="/resources">Resources</Button> 
                     <Button className="button-style" color="primary" variant="outlined" onClick={() => this.handleShow()}>
                         Become a Member
                     </Button>

@@ -11,7 +11,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #eeeeee;
+  background-color: #e0e0e0;
   color: #111111;
 }
 p {
@@ -35,11 +35,17 @@ code {
 .main-container {
   padding-top: 6rem;
 }
+a:hover {
+  color: rgba(0, 0, 0, 0.87);
+}
+.padding-top {
+  margin-top: 1rem !important;
+}
 
 /* APP BAR STYLES */
 .app-bar {
   position: 'relative';
-  background-color: #eeeeee !important;
+  background-color: #e0e0e0 !important;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 .app-bar-title {
@@ -52,6 +58,10 @@ code {
 .app-bar-title a:hover {
   text-decoration: none;
 }
+.nav-buttons:hover {
+  background-color: transparent !important;
+  color: #378c0a;
+}
 
 /* OVERVIEW PAGE STYLES */
 .splash {
@@ -60,7 +70,7 @@ code {
   background-size: cover;
 }
 .main-title {
-  color: #eeeeee;
+  color: #e0e0e0;
   font-size: 4em;
   text-align: center;
   padding-top: 50vh;
@@ -71,7 +81,7 @@ code {
   letter-spacing: 2px;
 }
 .sub-title {
-  color: #eeeeee;
+  color: #e0e0e0;
   font-size: 1.1rem;
   text-align: center;
   font-weight: 600;
@@ -81,19 +91,19 @@ code {
   padding: 5rem 0;
 }
 .bg-blue {
-  background-color: #326273;
-  color: #111111 !important;
+  background-color: #233d44;
+  color: #e0e0e0 !important;
 }
 .bg-green {
   background-color: #acdd8e;
   color: #111111 !important;
 }
 .contain-sign-up {
-  background-color: #326273;
+  background-color: #233d44;
   padding: 2rem;
   margin-left: 2rem;
   border-radius: 25px;
-  color: #eeeeee;
+  color: #e0e0e0;
 }
 .landing-header {
   font-size: 2rem;
@@ -111,6 +121,7 @@ code {
   font-family: "Oswald";
   text-transform: uppercase;
   border: none;
+  background-color: #e0e0e0;
 }
 .form-item:focus, .form-submit:focus {
   outline: none;
@@ -208,8 +219,8 @@ width: 15vh !important;
 /*POST BODY STYLES*/
 .contain-post-body {
   padding: 2rem;
-  background-color: #326273;
-  color: #eeeeee;
+  background-color: #233d44;
+  color: #e0e0e0;
   margin: 1rem 0;
 }
 .write-comment {
