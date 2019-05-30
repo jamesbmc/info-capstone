@@ -251,7 +251,7 @@ export class Forum extends Component {
 
                         </div>
                         <div>
-                            <p>Body:</p>
+                            <p>Body (if creating a link post, please put only the one link in here) :</p>
 
                             <textarea className="full-width new-post-form" rows="8" cols="60" name="body" onChange={event => this.handleChange(event)} />
                         </div>
