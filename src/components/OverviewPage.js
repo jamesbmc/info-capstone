@@ -113,27 +113,6 @@ export class OverviewPage extends Component {
                 </p>
                 </Col>
                 </Row>
-
-                <Row className="content-row">
-                <Col xsOffset={1} xs={10}>
-                    <p>
-                        news items here
-                </p>
-                </Col>
-                </Row>
-
-                <Row between="xs" className="content-row bg-blue">
-                    <Col xsOffset={1} xs={12} md={3}>
-                    {/*need to add email signup form component*/}
-                    footer column 1
-                    </Col>
-                    <Col xs={12} md={3}>
-                    footer column 2
-                    </Col>
-                    <Col xs={12} md={3}>
-                    footer column 3
-                    </Col>
-                </Row>
             </Grid>
         );
     }

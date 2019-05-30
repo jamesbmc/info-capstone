@@ -82,6 +82,7 @@ export class PostBody extends Component {
                 <p>by {this.state.post.author}</p>
                 <div className="contain-post-body">
                     {$linker}
+                    {this.state.post.imgUrl !== "" && <img src={this.state.post.imgUrl} alt="asdf" style={{ width: '100%' }}/>}
                 </div>
                 <div align="left">
                 <textarea className="write-comment full-width" rows="8" cols="60" name="comment" onChange={event => this.handleChange(event)} align="left"></textarea>

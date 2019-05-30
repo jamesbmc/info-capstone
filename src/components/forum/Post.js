@@ -64,7 +64,8 @@ export class Post extends Component {
         }
     }
 
-    deletePost(messageRef) {
+    deletePost(e, messageRef) {
+        e.preventDefault();
         if (this.props.info.imgUrl !== '') {
             var storageRef = firebase.storage().ref();
             console.log(this.props.info.imgFullPath);
@@ -75,7 +76,7 @@ export class Post extends Component {
             }).catch(function(error) {
                 // an error occurred!
             });
-        } 
+        }
         messageRef.remove();
 
     }
@@ -104,8 +105,8 @@ export class Post extends Component {
                     pathname: "/forum/" + this.props.info.id
                 }}>
                     <div className="contain-card-content col">
-                    
-                        
+
+
 
                         <CardContent className="col">
                             <Typography gutterBottom variant="h5" component="h2">
@@ -116,18 +117,18 @@ export class Post extends Component {
           </Typography>
                         </CardContent>
 
-                        
+
                     <div className="card-media-wrapper">
                         {$image}
                     </div>
-                        
+
                         <CardActions className="col-3">
                     {(typeof this.props.info.upvotes === "undefined" || !this.props.info.upvotes.includes(firebase.auth().currentUser.uid)) && <img src={upvote} className="vote-button" alt="Upvote icon" onClick={(e) => this.handleVote(e, "up")} />}
                         {(typeof this.props.info.upvotes !== "undefined" && this.props.info.upvotes.includes(firebase.auth().currentUser.uid)) && <img src={upvoteDisabled} className="vote-button" alt="Upvote icon (disabled)" onClick={(e) => this.voidVote(e, "up")} />}
                         <p>{total}</p>
                         {(typeof this.props.info.downvotes === "undefined" || !this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvote} className="vote-button" alt="Downvote icon" onClick={(e) => this.handleVote(e, "down")} />}
                         {(typeof this.props.info.downvotes !== "undefined" && this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvoteDisabled} className="vote-button" alt="Downvote icon (disabled)" onClick={(e) => this.voidVote(e, "down")} />}
-                        {(this.props.username === this.props.info.author || this.state.isAdmin) && <Button className="button-style" color="primary" variant="outlined" onClick={() => this.deletePost(firebase.database().ref('posts/' + this.props.info.id))}> Delete Post </Button>}
+                        {(this.props.username === this.props.info.author || this.state.isAdmin) && <Button className="button-style" color="primary" variant="outlined" onClick={(e) => this.deletePost(e, firebase.database().ref('posts/' + this.props.info.id))}> Delete Post </Button>}
                     </CardActions>
                     </div>
                     </Link>
