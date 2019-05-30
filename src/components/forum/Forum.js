@@ -85,7 +85,7 @@ export class Forum extends Component {
         if (this.state.title === "" || this.state.body === "") {
             alert("One of the required fields is empty!");
             return;
-        } 
+        }
         if (this.state.file !== '') {
             var storageRef = firebase.storage().ref();
             var file = this.state.file;
@@ -93,7 +93,7 @@ export class Forum extends Component {
             var user = firebase.auth().currentUser;
             var email = user.email;
             var uploadTask = storageRef.child(email).child('images/' + file.name).put(file, metadata);
-            this.setState({imagePath: email + "/" + 'images/' + file.name});
+            this.setState({ imagePath: email + "/" + 'images/' + file.name });
             console.log(this.state.imagePath);
             uploadTask.on('state_changed', function (snapshot) {
                 // Observe state change events such as progress, pause, and resume
@@ -193,9 +193,9 @@ export class Forum extends Component {
     }
 
 
-    
+
     handleLink() {
-        this.setState({link: true});
+        this.setState({ link: true });
         this.handleShow();
     }
 
@@ -204,9 +204,7 @@ export class Forum extends Component {
         let { imagePreviewUrl } = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
-            $imagePreview = (<img className="imgPreview.img" alt="preview of what is being displayed" src={imagePreviewUrl} />)
-        } else {
-            $imagePreview = (<div className="previewText">Please select an Image for preview </div>)
+            $imagePreview = (<div className="contain-img-preview"><img className="img-preview" alt="preview of what is being displayed" src={imagePreviewUrl} /></div>)
         }
         let posts = this.state.posts.sort((a, b) => {
             let aUpvotes = typeof a.upvotes === "undefined" ? 0 : a.upvotes.length;
@@ -223,8 +221,8 @@ export class Forum extends Component {
                 <div className="contain-posts">
                     {posts}
                 </div>
-                
-                
+
+
                 <Modal className="post-modal" show={this.state.show} onHide={() => this.handleClose()}>
                     <Modal.Header closeButton>
                         <Modal.Title>New Post</Modal.Title>
@@ -232,28 +230,28 @@ export class Forum extends Component {
                     <Modal.Body>
                         <div>
                             <p>Title:</p>
-                            <span>         </span>
-                            <input className="full-width" type="text" name="title" onChange={event => this.handleChange(event)} />
+
+                            <input className="full-width new-post-form" type="text" name="title" onChange={event => this.handleChange(event)} />
                         </div>
-                        <div className="row">
-                                <div className="imgPreview">  {$imagePreview}
-                                </div>
-                                <div className="flex-start-file">
-                                    <p>File to upload: </p>
-                                    <input type="file" style={divStyle}
-                                        accept="image/*"
-                                        className="form-control-upload"
-                                        onChange={evt => this.handleImageChange(evt)}
-                                    />
-                                </div>
+
+                        <div className="imgPreview">  {$imagePreview}
+                        </div>
+                        <div className="flex-start-file">
+                            <p>File to upload: </p>
+                            <input type="file" style={divStyle}
+                                accept="image/*"
+                                className="form-control-upload new-post-form"
+                                onChange={evt => this.handleImageChange(evt)}
+                            />
+
                         </div>
                         <div>
                             <p>Body:</p>
-                            <span>         </span>
-                            <textarea className="full-width" rows="8" cols="60" name="body" onChange={event => this.handleChange(event)} />
+
+                            <textarea className="full-width new-post-form" rows="8" cols="60" name="body" onChange={event => this.handleChange(event)} />
                         </div>
                     </Modal.Body>
-                    <Modal.Footer className="footer-modal"> 
+                    <Modal.Footer className="footer-modal">
                         <Button className="button-style" color="primary" variant="contained" onClick={() => this.handleClose()}>
                             Close
                         </Button>
