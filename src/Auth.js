@@ -82,6 +82,14 @@ export class Auth extends Component {
         });
     }
 
+    handleReset() {
+        firebase.auth().sendPasswordResetEmail(this.state.email).then(function() {
+            // Email sent.
+          }).catch(function(error) {
+            // An error happened.
+          });
+    }
+
     componentWillUnmount() {
         this._isMounted = false;
     }
@@ -114,7 +122,8 @@ export class Auth extends Component {
                     <div className="form-group">
                         <div>
                             <Button className="button-spacer" color="primary" variant="outlined" onClick={() => this.handleSignIn()}>Sign In</Button>
-                            <Button color="primary" variant="contained" onClick={() => this.handleSignUp()}>Sign Up</Button>
+                            <Button className="button-spacer" color="primary" variant="contained" onClick={() => this.handleSignUp()}>Sign Up</Button>
+                            <Button size="small" color="primary" variant="outlined" onClick={() => this.handleReset()}>Reset Password</Button>
                         </div>
                     </div>
                 </div>
