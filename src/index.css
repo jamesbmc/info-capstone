@@ -58,6 +58,10 @@ a:hover {
 .app-bar-title a:hover {
   text-decoration: none;
 }
+.nav-buttons:hover {
+  background-color: transparent !important;
+  color: #378c0a;
+}
 
 /* OVERVIEW PAGE STYLES */
 .splash {
