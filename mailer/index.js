@@ -81,7 +81,7 @@ async function sendEmail(email, name, posts) {
   mailOptions.subject = `Your Project Gravity Daily Digest`;
   let emailHtml = `<p>Hey ${name || ''}! Below are the Project Gravity posts from today:</p>`
     + posts.map(post => `<br><a href="https://gravity-28052.firebaseapp.com/forum/${post.id}">${post.title}</a>`).join("") +
-    '<br><p>Anything sound interesting? <a href="https://gravity-28052.firebaseapp.com/demo/">Join the discussion!</a></p>';
+    '<br><p>Anything sound interesting? <a href="https://gravity-28052.firebaseapp.com/forum/">Join the discussion!</a></p>';
   mailOptions.html = emailHtml;
   await mailTransport.sendMail(mailOptions);
   console.log('email sent to:', email);
