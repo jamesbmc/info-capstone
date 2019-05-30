@@ -1,5 +1,9 @@
 {
     "rules": {
+        "Admin": {
+            ".read": true,
+            ".write": true
+        },
         "users": {
             ".read": true,
             ".write": true
