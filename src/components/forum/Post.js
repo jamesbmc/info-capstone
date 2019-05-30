@@ -103,8 +103,11 @@ export class Post extends Component {
                     <Link to={{
                     pathname: "/forum/" + this.props.info.id
                 }}>
-                        {$image}
-                        <CardContent>
+                    <div className="contain-card-content col">
+                    
+                        
+
+                        <CardContent className="col">
                             <Typography gutterBottom variant="h5" component="h2">
                             {this.props.info.title}
           </Typography>
@@ -112,9 +115,12 @@ export class Post extends Component {
                             {this.props.info.author + ", " + this.props.info.date}
           </Typography>
                         </CardContent>
-                        </Link>
-                    </CardActionArea>
-                    <CardActions>
+
+                        
+                    <div className="card-media-wrapper">
+                    {$image}</div>
+                        
+                        <CardActions className="col-3">
                     {(typeof this.props.info.upvotes === "undefined" || !this.props.info.upvotes.includes(firebase.auth().currentUser.uid)) && <img src={upvote} className="vote-button" alt="Upvote icon" onClick={(e) => this.handleVote(e, "up")} />}
                         {(typeof this.props.info.upvotes !== "undefined" && this.props.info.upvotes.includes(firebase.auth().currentUser.uid)) && <img src={upvoteDisabled} className="vote-button" alt="Upvote icon (disabled)" onClick={(e) => this.voidVote(e, "up")} />}
                         <p>{total}</p>
@@ -122,6 +128,9 @@ export class Post extends Component {
                         {(typeof this.props.info.downvotes !== "undefined" && this.props.info.downvotes.includes(firebase.auth().currentUser.uid)) && <img src={downvoteDisabled} className="vote-button" alt="Downvote icon (disabled)" onClick={(e) => this.voidVote(e, "down")} />}
                         {(this.props.username === this.props.info.author || this.state.isAdmin) && <Button className="button-style" color="primary" variant="outlined" onClick={() => this.deletePost(firebase.database().ref('posts/' + this.props.info.id))}> Delete Post </Button>}
                     </CardActions>
+                    </div>
+                    </Link>
+                         </CardActionArea>
                 </Card>
 
 

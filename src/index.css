@@ -14,7 +14,9 @@ body {
   background-color: #eeeeee;
   color: #111111;
 }
-
+p {
+  margin: 0;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -23,10 +25,7 @@ code {
   margin: 0 !important;
   padding: 0 !important;
 }
-.row {
-  margin-right: -16px !important;
-  margin-left: -16px !important;
-}
+
 .button-spacer {
   margin-right: 10px !important;
 }
@@ -141,16 +140,27 @@ code {
 
 .post-card {
     margin-bottom: 1rem;
+
+}
+.contain-card-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .post-card a:hover {
   text-decoration: none;
 }
-.media {
-    height: 140;
+.col {
+  flex: 1;
 }
-.card-img {
-  height: 200px;
-  width: auto;
+.col-3 {
+  flex: 1;
+  justify-content: flex-end;
+  max-width: 15%;
+}
+.post-media {
+  height: 100%;
+  object-fit: cover;
 }
 .vote-button {
   width: 24px;
@@ -158,9 +168,8 @@ code {
 img.vote-button:hover {
   cursor: pointer !important;
 }
-.post-media {
-  height: 100%;
-  width: 100%;
+.card-media-wrapper {
+width: 15vh !important;
 }
 .full-width {
   width: 100%;
@@ -168,6 +177,33 @@ img.vote-button:hover {
 .post-modal {
   margin-top: 5rem;
 }
+.contain-img-preview {
+  width: 150px !important;
+  height: 150px !important;
+  padding: 1rem 0;
+}
+.img-preview {
+  height: 100% !important;
+  width: auto !important;
+}
+.new-post-form {
+  margin-bottom: 1rem;
+}
+.forum-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.sign-out {
+  font-weight: 600;
+}
+.sign-out:hover {
+  cursor: pointer;
+}
+.forum-buttons-padding {
+  margin-top: .5rem;
+}
+
 
 /*POST BODY STYLES*/
 .contain-post-body {

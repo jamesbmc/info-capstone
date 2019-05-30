@@ -45,15 +45,15 @@ app.listen(port, host, () => {
         members = memberArray;
     });
 
-    let pastDay = new Date().getTime() - (24 * 3600 * 1000);
-    let postRef = firebase.database().ref('posts').orderByChild('date').startAt(pastDay);
+    let postRef = firebase.database().ref('posts');
     postRef.on('value', (snapshot) => {
         posts = getPosts(snapshot)
     });
 
     setInterval(function() {
-        console.log(members);
-        console.log(posts);
+        let pastDay = new Date().getTime() - (24 * 3600 * 1000);
+        posts = posts.filter(post => post.date >= pastDay);
+
         if (Object.keys(posts).length != 0) {
             console.log('send email');
             members.forEach(member => {
@@ -66,14 +66,6 @@ app.listen(port, host, () => {
         } else {
             console.log('no recent posts');
         }
-
-        // Resetting the reference to the database
-        pastDay = new Date().getTime() - (24 * 3600 * 1000);
-        postRef = firebase.database().ref('posts').orderByChild('date').startAt(pastDay);
-
-        postRef.on('value', (snapshot) => {
-            posts = getPosts(snapshot)
-        });
     }, milliseconds_in_day);
 
     console.log(`server is listening at http://${addr}...`);
@@ -103,6 +95,7 @@ function getPosts(snapshot) {
             return {
                 id: id,
                 title: postsObject[id].title,
+                date: postsObject[id].date
             }
         });
         return postArray;
