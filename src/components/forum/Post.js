@@ -118,7 +118,8 @@ export class Post extends Component {
 
                         
                     <div className="card-media-wrapper">
-                    {$image}</div>
+                        {$image}
+                    </div>
                         
                         <CardActions className="col-3">
                     {(typeof this.props.info.upvotes === "undefined" || !this.props.info.upvotes.includes(firebase.auth().currentUser.uid)) && <img src={upvote} className="vote-button" alt="Upvote icon" onClick={(e) => this.handleVote(e, "up")} />}
