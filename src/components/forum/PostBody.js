@@ -14,7 +14,7 @@ export class PostBody extends Component {
                title: "",
                author: "",
                body: "",
-               link: false,
+               link: "",
            }
         };
     }
@@ -32,7 +32,7 @@ export class PostBody extends Component {
                         title: "",
                         author: "",
                         body: "",
-                        link: false,
+                        link: "",
                     }
                 });
             }
@@ -66,14 +66,15 @@ export class PostBody extends Component {
 
     render() {
         let $linker = null;
-        if (this.state.post.link) {
-            $linker = (<a href = {this.state.post.body}
-                title="The link given">{this.state.post.body}</a>);
-        } else {
-           $linker = (this.state.post.body.split('\n').map((item, i) => {
-                return <p key={i}>{item}</p>;})
-            );
+        console.log(this.state.post.link);
+        console.log(this.state.post.body);
+        if (this.state.post.link !== '') {
+            $linker = (<a href = {this.state.post.link}
+                title="The link given">{this.state.post.link}</a>);
         }
+        let $body = (this.state.post.body.split('\n').map((item, i) => {
+            return <p key={i}>{item}</p>;})
+        );
         return (
             <Grid fluid className="forum-container">
                 <Row>
@@ -81,7 +82,8 @@ export class PostBody extends Component {
                 <h1>{this.state.post.title}</h1>
                 <p>by {this.state.post.author}</p>
                 <div className="contain-post-body">
-                    {$linker}
+                    {$body} 
+                    {$linker} 
                 </div>
                 <div align="left">
                 <textarea className="write-comment full-width" rows="8" cols="60" name="comment" onChange={event => this.handleChange(event)} align="left"></textarea>
