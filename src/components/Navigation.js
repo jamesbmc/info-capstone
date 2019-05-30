@@ -95,17 +95,17 @@ export class Navigation extends Component {
                         <div>
                             <p>First Name:</p>
                             <span>         </span>
-                            <input className="full-width" type="text" name="firstName" onChange={event => this.handleChange(event)} />
+                            <input className="full-width new-post-form" type="text" name="firstName" onChange={event => this.handleChange(event)} />
                         </div>
                         <div>
                             <p>Last Name:</p>
                             <span>         </span>
-                            <input className="full-width" type="text" name="lastName" onChange={event => this.handleChange(event)} />
+                            <input className="full-width new-post-form" type="text" name="lastName" onChange={event => this.handleChange(event)} />
                         </div>
                         <div>
                             <p>Email:</p>
                             <span>         </span>
-                            <input className="full-width" type="text" name="email" onChange={event => this.handleChange(event)} />
+                            <input className="full-width new-post-form" type="text" name="email" onChange={event => this.handleChange(event)} />
                         </div>
                         <div>
                             <p>ZIP/Postal Code:</p>
