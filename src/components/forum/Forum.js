@@ -23,7 +23,7 @@ export class Forum extends Component {
             imagePreviewUrl: "", //added
             url: '',
             imagePath: '',
-            link: false,
+            link: "",
         };
     }
 
@@ -44,7 +44,8 @@ export class Forum extends Component {
                         date: new Date(posts[id].date),
                         upvotes: posts[id].upvotes,
                         downvotes: posts[id].downvotes,
-                        comments: posts[id].comments
+                        comments: posts[id].comments,
+                        link: posts[id].link,
                     }
                 });
                 this.setState({ posts: postArray });
@@ -192,14 +193,6 @@ export class Forum extends Component {
         reader.readAsDataURL(file)
     }
 
-
-
-    handleLink() {
-        this.setState({ link: true });
-        this.handleShow();
-    }
-
-
     render() {
         const user = firebase.auth().currentUser.displayName;
         let { imagePreviewUrl } = this.state;
@@ -219,7 +212,6 @@ export class Forum extends Component {
             <div className ="forum-buttons">
                 <div className="col">
                 <Button color="primary" variant="contained" className="button-style button-spacer" onClick={() => this.handleShow()}>Create a New Post</Button>
-                <Button color="primary" variant="contained" className="button-style button-spacer" onClick={() => this.handleLink()}>Create a New Link Post</Button>
                 </div><div className="col">
                 <div className="float-right forum-buttons-padding">Signed in as {user}. <a className="sign-out" onClick={() => this.props.logout()}>Log Out</a>.
                 </div></div></div>
@@ -251,9 +243,14 @@ export class Forum extends Component {
 
                         </div>
                         <div>
-                            <p>Body (if creating a link post, please put only the one link in here) :</p>
+                            <p>Body:</p>
 
                             <textarea className="full-width new-post-form" rows="8" cols="60" name="body" onChange={event => this.handleChange(event)} />
+                        </div>
+                        <div>
+                            <p>Link(optional):</p>
+
+                            <textarea className="full-width new-post-form" rows="8" cols="60" name="link" onChange={event => this.handleChange(event)} />
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="footer-modal">
