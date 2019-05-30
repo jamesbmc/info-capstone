@@ -11,7 +11,7 @@ import 'firebase/storage';
 
 const divStyle = {
     width: "239px",
-    height: "39px" //i changed the height had to
+    height: "39px" 
 };
 
 export class Forum extends Component {

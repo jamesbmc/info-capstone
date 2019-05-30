@@ -86,9 +86,15 @@ export class Post extends Component {
         let total = upvotes - downvotes;
         let $image = null;
         if (this.state.imagePreview) {
-            $image = this.state.imagePreview;
+            $image = (<CardMedia
+                component="img"
+                alt=""
+                className="post-media"
+                image= {this.state.imagePreview}
+                title=""
+            />)
         } else {
-            $image = '';
+            $image = null;
         }
         return (
             <div>
@@ -97,13 +103,7 @@ export class Post extends Component {
                     <Link to={{
                     pathname: "/forum/" + this.props.info.id
                 }}>
-                        {<CardMedia
-                            component="img"
-                            alt=""
-                            className="post-media"
-                            image= {$image}
-                            title=""
-                        />}
+                        {$image}
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
                             {this.props.info.title}

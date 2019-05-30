@@ -68,10 +68,10 @@ export class PostBody extends Component {
         let $linker = null;
         if (this.state.post.link) {
             $linker = (<a href = {this.state.post.body}
-            title="The link given">{this.state.post.body}</a>);
+                title="The link given">{this.state.post.body}</a>);
         } else {
            $linker = (this.state.post.body.split('\n').map((item, i) => {
-            return <p key={i}>{item}</p>;})
+                return <p key={i}>{item}</p>;})
             );
         }
         return (
