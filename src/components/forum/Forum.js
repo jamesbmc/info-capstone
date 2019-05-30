@@ -248,12 +248,12 @@ export class Forum extends Component {
                             <textarea className="full-width new-post-form" rows="8" cols="60" name="body" onChange={event => this.handleChange(event)} />
                         </div>
                         <div>
-                            <p>Link(optional):</p>
+                            <p>Share a link (optional):</p>
 
-                            <textarea className="full-width new-post-form" rows="8" cols="60" name="link" onChange={event => this.handleChange(event)} />
+                            <input className="full-width" type="text" name="link" onChange={event => this.handleChange(event)} />
                         </div>
                     </Modal.Body>
-                    <Modal.Footer className="footer-modal">
+                    <Modal.Footer>
                         <Button className="button-style" color="primary" variant="contained" onClick={() => this.handleClose()}>
                             Close
                         </Button>
