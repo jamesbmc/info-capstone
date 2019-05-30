@@ -201,6 +201,7 @@ export class Forum extends Component {
 
 
     render() {
+        const user = firebase.auth().currentUser.displayName;
         let { imagePreviewUrl } = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
@@ -215,9 +216,13 @@ export class Forum extends Component {
         }).map((post, i) => <Post key={i} info={post} username={Object.keys(this.state.users[firebase.auth().currentUser.uid])[0]} />);
         return (
             <div>
+            <div className ="forum-buttons">
+                <div className="col">
                 <Button color="primary" variant="contained" className="button-style button-spacer" onClick={() => this.handleShow()}>Create a New Post</Button>
                 <Button color="primary" variant="contained" className="button-style button-spacer" onClick={() => this.handleLink()}>Create a New Link Post</Button>
-                <Button color="primary" variant="outlined" className="button-style" onClick={() => this.props.logout()}>Logout</Button>
+                </div><div className="col">
+                <div className="float-right forum-buttons-padding">Signed in as {user}. <a className="sign-out" onClick={() => this.props.logout()}>Log Out</a>.
+                </div></div></div>
                 <div className="contain-posts">
                     {posts}
                 </div>

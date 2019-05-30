@@ -189,6 +189,21 @@ width: 15vh !important;
 .new-post-form {
   margin-bottom: 1rem;
 }
+.forum-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.sign-out {
+  font-weight: 600;
+}
+.sign-out:hover {
+  cursor: pointer;
+}
+.forum-buttons-padding {
+  margin-top: .5rem;
+}
+
 
 /*POST BODY STYLES*/
 .contain-post-body {
