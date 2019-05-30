@@ -11,7 +11,7 @@ import 'firebase/storage';
 
 const divStyle = {
     width: "239px",
-    height: "39px" 
+    height: "39px"
 };
 
 export class Forum extends Component {
@@ -58,9 +58,9 @@ export class Forum extends Component {
 
         this.userRef.on('value', (snapshot) => {
             if (snapshot.val() !== null) {
-                this.setState({ users: snapshot.val() });
+                this.setState({ users: snapshot.val(), username: Object.keys(snapshot.val()[firebase.auth().currentUser.uid])[0] });
             } else {
-                this.setState({ users: [] });
+                this.setState({ users: [], username: "" });
             }
         });
     }
@@ -157,7 +157,7 @@ export class Forum extends Component {
                         imgFullPath: this.state.imagePath,
                         link: this.state.link,
                         body: this.state.body,
-                        author: Object.keys(this.state.users[firebase.auth().currentUser.uid])[0],
+                        author: this.state.username,
                         date: new Date().getTime(),
                         upvotes: [firebase.auth().currentUser.uid]
                     }
@@ -171,7 +171,7 @@ export class Forum extends Component {
                 imgUrl: "",
                 link: this.state.link,
                 body: this.state.body,
-                author: Object.keys(this.state.users[firebase.auth().currentUser.uid])[0],
+                author: this.state.username,
                 date: new Date().getTime(),
                 upvotes: [firebase.auth().currentUser.uid]
             }
@@ -194,7 +194,6 @@ export class Forum extends Component {
     }
 
     render() {
-        const user = firebase.auth().currentUser.displayName;
         let { imagePreviewUrl } = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
@@ -206,14 +205,14 @@ export class Forum extends Component {
             let bUpvotes = typeof b.upvotes === "undefined" ? 0 : b.upvotes.length;
             let bDownvotes = typeof b.downvotes === "undefined" ? 0 : b.downvotes.length;
             return (bUpvotes - bDownvotes) - (aUpvotes - aDownvotes);
-        }).map((post, i) => <Post key={i} info={post} username={Object.keys(this.state.users[firebase.auth().currentUser.uid])[0]} />);
+        }).map((post, i) => <Post key={i} info={post} username={this.state.username} />);
         return (
             <div>
             <div className ="forum-buttons">
                 <div className="col">
                 <Button color="primary" variant="contained" className="button-style button-spacer" onClick={() => this.handleShow()}>Create a New Post</Button>
                 </div><div className="col">
-                <div className="float-right forum-buttons-padding">Signed in as {user}. <a className="sign-out" onClick={() => this.props.logout()}>Log Out</a>.
+                <div className="float-right forum-buttons-padding">Signed in as {this.state.username}. <a className="sign-out" onClick={() => this.props.logout()}>Log Out</a>.
                 </div></div></div>
                 <div className="contain-posts">
                     {posts}

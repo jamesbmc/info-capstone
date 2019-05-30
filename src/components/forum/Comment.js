@@ -12,7 +12,7 @@ export class Comment extends Component {
     }
 
     componentWillMount() {
-        firebase.database().ref("Admin/" + this.props.username).once('value')
+        firebase.database().ref("Admin/" + firebase.auth().currentUser.displayName).once('value')
             .then((snapshot) => {
                 var a = snapshot.exists();  // true if an admin, false if not an admin
                 this.setState({isAdmin: a});
