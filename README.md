@@ -1,9 +1,5 @@
 # Project Gravity
 
-## Testing
-run `npm start` to start a local test server. (Remember to run `npm install` to install all required dependencies).
+[Project Scope of Work](https://docs.google.com/document/d/1ueX59sUOZ4-gaxnmQivlaF76aS_Z8t_VPesT9BoOMzU/edit?usp=sharing)
 
-## Deployment
-run `npm run build` and then `firebase deploy --project firebase-28052` to deploy.
-
-Requires the firebase CLI (`npm install -g firebase-tools`)
+[Project Documentation](https://docs.google.com/document/d/1LxmsJiZsWyjzFlPBzjQN5B5uUVkCkVTO465w7tItw5M/edit?usp=sharing)
